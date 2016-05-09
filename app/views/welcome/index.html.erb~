@@ -1,0 +1,13 @@
+<body>
+<h1 align="center">Привет, Rails!</h1>
+<h3 align="center">
+  <% if user_signed_in? %>
+    <span>Здравствуйте, <%= current_user.email %></span>
+    <%= link_to 'Профиль', persons_profile_path %>
+    <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+  <% else %>
+    <%= link_to 'Войти', new_user_session_path %> или <%= link_to 'Зарегистрироваться', new_user_registration_path %>
+  <% end %> </h3>
+<%= link_to "chat", chat_path>
+</body>
+

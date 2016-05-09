@@ -1,0 +1,12 @@
+class WelcomeController < ApplicationController
+  def index
+    user_agent =  request.env['HTTP_USER_AGENT'].downcase
+    if user_agent.index('iphone')
+      redirect_to chat_path
+    end    
+  end 
+
+  def chat
+  end 
+
+end

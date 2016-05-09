@@ -1,0 +1,9 @@
+I"¦(function() {
+  $(function() {
+    return $("#generate button").click(function() {
+      return alert("password = " + this.p.password);
+    });
+  });
+
+}).call(this);
+:ET

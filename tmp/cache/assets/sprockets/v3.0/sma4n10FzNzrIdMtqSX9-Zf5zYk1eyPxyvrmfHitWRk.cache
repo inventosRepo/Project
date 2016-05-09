@@ -1,0 +1,9 @@
+I"¸(function() {
+  $(function() {
+    return $("#surrounding div").click(function() {
+      return alert("You clicked on the sub-div with id = " + this.id);
+    });
+  });
+
+}).call(this);
+:ET

@@ -9,6 +9,7 @@
       <div id="form">
         <input type="text" id="message">
         <button id="disconnect">Disconnect</button>
+        <button id="left">Left</button>
       </div>
     </div>
 
@@ -71,6 +72,10 @@
 
       $("#disconnect").click(function() {
         socket.close()
+      });
+      
+      $("#left").click(function() {
+        socket.send("left")
       });
     </script>
   </body>

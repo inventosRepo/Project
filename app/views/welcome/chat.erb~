@@ -16,7 +16,7 @@
     <script>
       // where our WebSockets logic will go later
       var socket, host;
-      host = "ws://localhost:3001";
+      host = "ws://0.0.0.0:3001";
 
       function connect() {
         try {

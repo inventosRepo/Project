@@ -16,7 +16,8 @@ get 'articles/:art_url' => 'articles#show', as: :custom_url
 get 'articles/:art_url/edit' => 'articles#edit', as: :custom_edit_url
 get 'новая_статья' => 'articles#new', as: :new_art
 get 'persons/profile', as: 'user_root'
-get 'welcome/chat' => 'welcome#chat', as: 'chat'
+get 'welcome/chat', as: 'chat'
+get 'welcome/left', as: 'buttons'
   # Example resource route (maps HTTP verbs to controller actions automatically):
 
  resources :articles do

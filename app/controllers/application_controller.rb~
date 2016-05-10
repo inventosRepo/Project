@@ -1,0 +1,42 @@
+require 'thin'
+require 'em-websocket'
+require 'sinatra/base'
+
+class ApplicationController < ActionController::Base
+  # Prevent CSRF attacks by raising an exception.
+  # For APIs, you may want to use :null_session instead.
+  EM.run do
+  class App < Sinatra::Base
+    get '/' do
+      erb :index
+    end
+  end
+
+  @clients = []
+
+  EM::WebSocket.start(:host => '0.0.0.0', :port => '3001') do |ws|
+    ws.onopen do |handshake|
+      @clients << ws
+      ws.send "Connected"
+    end
+
+    ws.onclose do
+      ws.send "Closed."
+      @clients.delete ws
+    end
+
+    ws.onmessage do |msg|
+      puts "Received Message: #{msg}"
+      @clients.each do |socket|
+        socket.send msg
+      end
+    end
+  end
+
+  App.run! :port => 3002
+
+end
+
+  protect_from_forgery with: :exception
+
+end

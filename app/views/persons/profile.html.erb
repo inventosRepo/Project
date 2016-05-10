@@ -3,12 +3,4 @@
 <p>Ваш код: <%=current_user.code %></p>
 <%= button_to "Сгенирировать код", persons_generate_path %>
 <p><%= link_to "Вернутся на главную", root_path %></p>
-
-<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-<script>
-window.onload = function() {
-var code = $('#code');
-alert(code);
-};
-</script>
 <h3 align="center"><%= link_to 'Обратно на главную', root_path %></h3>

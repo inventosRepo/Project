@@ -8,7 +8,7 @@
     <p><%= link_to "Вернутся на главную", root_path %></p>
     <div class="container">
         <%= image_tag "right.png", id: "right" %>
-        <%= image_tag "left.png", id: "left" %>	
+        <%= image_submit_tag "left.png", id: "left" %>	
 	<%= image_tag "up.png", id: "up" %>
 	<%= image_tag "down.png", id: "down" %>
 	<%= image_tag "fire.png", id: "fire" %>
@@ -22,6 +22,8 @@
       host = "ws://192.168.1.80:3001";
 
       var name = $("#name").html();
+  
+      var timeoutId = 0;
 
       function connect() {
         socket = new WebSocket(host);
@@ -35,8 +37,14 @@
         socket.close()
       });
       
-      $("#left").click(function() {
-        socket.send("left")
+      $(document).ready(function(){
+
+      $('#left').mousedown(function() {
+        timeoutId = setTimeout(socket.send("left"), 1000);
+        }).bind('mouseup mouseleave', function() {
+        clearTimeout(timeoutId);
+      });
+
       });
 
       $("#right").click(function() {
@@ -44,7 +52,7 @@
       });
 
       $("#up").click(function() {
-        socket.send("by: "+name+"up");
+        socket.send("by: "+name+" up");
       });
 
       $("#down").click(function() {

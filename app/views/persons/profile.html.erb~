@@ -1,5 +1,8 @@
-<h1 align="center">Добро пожаловать, <%= current_user.email %></h1>
-<div id="code"><%= @p.password %></div>
+<h1>Ваш профиль</h1>
+<p>Ваш логин <%=current_user.email %></p>
+<p>Ваш код: <%=current_user.code %></p>
+<%= button_to "Сгенирировать код", persons_generate_path %>
+<p><%= link_to "Вернутся на главную", root_path %></p>
 
 <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 <script>

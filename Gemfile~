@@ -1,9 +1,8 @@
 source 'https://rubygems.org'
 
 gem 'mysql2'
-gem 'timers'
 gem 'websocket-rails'
-gem 'thin'
+gem 'thin', '1.5.1'
 gem 'sinatra'
 gem 'em-websocket'
 gem 'eventmachine'

@@ -1,5 +1,11 @@
-<%=form_tag welcome_mobile_buttons_path do |f| %>
-  <label for="code">Введите код</label>
-  <%= text_field_tag :code %>
-  <%= submit_tag "Подтвердить" %>
+<% if user_signed_in? %>
+  <span>Здравствуйте, <%= current_user.email %></span>
+  <%= link_to "Buttons", mobile_buttons_path %>
+  <%= link_to 'Выйти', destroy_user_session_path, :method => :delete %>
+<% else %>
+  <%=form_tag welcome_mobile_buttons_path do |f| %>
+    <label for="code">Введите код</label>
+    <%= text_field_tag :code %>
+    <%= submit_tag "Подтвердить" %>
+  <% end %>
 <% end %>

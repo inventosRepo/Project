@@ -5,6 +5,7 @@ Rails.application.routes.draw do
 root 'welcome#index'
 get 'persons/profile', as: 'user_root'
 get 'welcome/chat', as: 'chat'
+get 'welcome/error', as: 'error'
 get 'welcome/mobile_buttons', as: 'mobile_buttons'
 get 'welcome/mobile_auth', as: 'mobile_auth'
 post 'persons/profile'

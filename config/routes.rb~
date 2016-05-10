@@ -8,8 +8,8 @@ get 'welcome/chat', as: 'chat'
 get 'welcome/mobile_buttons', as: 'mobile_buttons'
 get 'welcome/mobile_auth', as: 'mobile_auth'
 post 'persons/profile'
-post 'welcome/mobile_auth'
 post 'persons/generate'
-post 'welcome/hi'
+post 'welcome/mobile_auth'
+post 'welcome/mobile_buttons'
 
 end

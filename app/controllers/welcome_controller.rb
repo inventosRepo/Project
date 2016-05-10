@@ -38,11 +38,19 @@ end
   def index
     user_agent =  request.env['HTTP_USER_AGENT'].downcase
     if user_agent.index('iphone')
-      redirect_to chat_path
+      redirect_to mobile_auth_path
     end    
   end 
 
   def chat
-  end 
+  end
+
+  def mobile_auth
+  end
+
+  def mobile_buttons
+    @code = params[:code]
+    sign_in(:user, User.find_by(code: @code))
+  end
 
 end

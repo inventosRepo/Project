@@ -1,4 +1,11 @@
 <h1 align="center">Добро пожаловать, <%= current_user.email %></h1>
-<h2 align="center">Ваш текущий пароль - <%= @p.password %>, Время пароля - 10 минут</h2>
-<h2><%= link_to "mobile", mobile_path %>
+<div id="code"><%= @p.password %></div>
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+<script>
+window.onload = function() {
+var code = $('#code');
+alert(code);
+};
+</script>
 <h3 align="center"><%= link_to 'Обратно на главную', root_path %></h3>

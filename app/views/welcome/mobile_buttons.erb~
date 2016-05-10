@@ -1,0 +1,59 @@
+<!doctype html>
+<html>
+  <head>
+  </head>
+  <body>
+    <h1>Buttons</h1>
+    Вы вошли как <div id="name"><%=current_user.email%></div>
+    <p><%= link_to "Вернутся на главную", root_path %></p>
+    <div class="container">
+        <%= image_tag "right.png", id: "right" %>
+        <%= image_tag "left.png", id: "left" %>	
+	<%= image_tag "up.png", id: "up" %>
+	<%= image_tag "down.png", id: "down" %>
+	<%= image_tag "fire.png", id: "fire" %>
+    </div>
+
+    <script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+    <script>
+      // where our WebSockets logic will go later
+      var socket, host;
+      
+      host = "ws://192.168.1.80:3001";
+
+      var name = $("#name").html();
+
+      function connect() {
+        socket = new WebSocket(host);
+      }
+
+      $(function() {
+        connect();
+      });
+
+      $("#disconnect").click(function() {
+        socket.close()
+      });
+      
+      $("#left").click(function() {
+        socket.send("left")
+      });
+
+      $("#right").click(function() {
+        socket.send("right")
+      });
+
+      $("#up").click(function() {
+        socket.send("by: "+name+"up");
+      });
+
+      $("#down").click(function() {
+        socket.send("down")
+      });
+
+      $("#fire").click(function() {
+        socket.send("fire!")
+      });
+    </script>
+  </body>
+</html>

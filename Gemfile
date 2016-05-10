@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 
 gem 'mysql2'
-gem 'timers'
 gem 'websocket-rails'
 gem 'thin'
 gem 'sinatra'

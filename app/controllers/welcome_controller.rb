@@ -1,33 +1,29 @@
 class WelcomeController < ApplicationController
+  require 'em-websocket'
+  
+  @clients = []
 
-before_filter :authenticate_user!, :except => [:index, :mobile_auth]  
+  EM::WebSocket.start(:host => '192.168.1.2', :port => '8080') do |ws|
+    ws.onopen do |handshake|
+      @clients << ws
+      ws.send "Connected"
+    end
 
-  def index
-    user_agent =  request.env['HTTP_USER_AGENT'].downcase
-    if user_agent.index('iphone')
-      redirect_to mobile_auth_path
-    end    
-  end 
+    ws.onclose do
+      ws.send "Closed."
+      @clients.delete ws
+    end
 
-  def chat
-  end
-
-  def mobile_auth
-  end
-
-  def mobile_buttons
-    if user_signed_in?
-      @user = @user = User.find_by(email: current_user.email)
-      sign_in(:user, @user)
-    else
-      @code = params[:code]
-      @user = User.find_by(code: @code)
-      if @user.nil?
-        redirect_to error_path
-      else
-        sign_in(:user, @user)
+    ws.onmessage do |msg|
+      puts "Received Message: #{msg}"
+      @clients.each do |socket|
+        socket.send msg
       end
     end
+  end
+
+  def index
+    
   end
 
 end

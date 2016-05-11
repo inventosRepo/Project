@@ -6,7 +6,7 @@ Devise.setup do |config|
   # confirmation, reset password and unlock tokens in the database.
   # Devise will use the `secret_key_base` as its `secret_key`
   # by default. You can change it below and use your own secret key.
-  # config.secret_key = '101154847d42b35e3aca7de07b89ad051ca76481d55b92f0ebbbb117e67b2815939acdc08a4ed6653fe000e68cc4251ad4d97cb214d9c4351099f8b542dfe232'
+  # config.secret_key = '748276d647bf86ac9b84ecf5c08df181197e20b0c7b6d1685a8909e050a0d0e7fca620975ef2517c84e5b6dd1954ea179e7dbac43d420c0d123fc5b3ff5ffc5c'
 
   # ==> Mailer Configuration
   # Configure the e-mail address which will be shown in Devise::Mailer,
@@ -34,7 +34,7 @@ Devise.setup do |config|
   # session. If you need permissions, you should implement that in a before filter.
   # You can also supply a hash where the value is a boolean determining whether
   # or not authentication should be aborted when the value is not present.
-  # config.authentication_keys = [:password]
+  # config.authentication_keys = [:email]
 
   # Configure parameters from the request object used for authentication. Each entry
   # given should be a request method and it will automatically be passed to the
@@ -102,7 +102,7 @@ Devise.setup do |config|
   config.stretches = Rails.env.test? ? 1 : 11
 
   # Set up a pepper to generate the hashed password.
-  # config.pepper = '03e30b0d5869216c5e6d75e1abe532b9623db54598fd3dd4f9be4fe0fed02b63f0b645ba6cc87665aa03348e6c73ac6a33a5ccb6e81f12c74810f2dbce562223'
+  # config.pepper = '7e2929af420fe503d9cca44ae0c3af43167df0ff817ee52eff88c62a6c3dc84fcbd4acff69f81a10ac430af8cf5ff45cb9ac39a248fb794a9dd5a64767ff083b'
 
   # Send a notification email when the user's password is changed
   # config.send_password_change_notification = false
@@ -214,7 +214,7 @@ Devise.setup do |config|
   # Turn scoped views on. Before rendering "sessions/new", it will first check for
   # "users/sessions/new". It's turned off by default because it's slower if you
   # are using only default views.
-  # config.scoped_views = false
+  config.scoped_views = true
 
   # Configure the default scope given to Warden. By default it's the first
   # devise role declared in your routes (usually :user).

@@ -1,6 +1,0 @@
-default:
-   adapter: mysql
-   database: rubydb
-   username: ruby
-   password: ruby
-   host: localhost

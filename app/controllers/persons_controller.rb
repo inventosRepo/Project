@@ -1,4 +1,7 @@
 class PersonsController < ApplicationController
+  def profile
+
+  end
 
   def generate
      a = ("a".."z").to_a

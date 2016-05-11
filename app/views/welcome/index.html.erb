@@ -1,62 +1,33 @@
 
 <h1>Battle city</h1>
+<head>
+<style>
+  .container {    
+    margin: 20px auto;
+    overflow: hidden;
+    position: relative;
+    width: 800px;
+  }
+  #scene {
+    background-color: #f3f4ef; border: 1px solid #dedede; padding: 5px;
+    position:relative;
+  }
+</style>
+</head>
 <div id="user_nav">
 	<% if user_signed_in?%>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-	<script>
-		var socket, host; var coor, coorY, coorX;
-		var name = '<%=current_user.email %>';
-		host = "ws://192.168.1.80:3004";
-		function connect() {
-			try {
-				socket = new WebSocket(host);
-				addMessage("Socket State: " + socket.readyState);
-
-				socket.onopen = function() {
-					addMessage("Socket Status: " + socket.readyState + " (open)");
-				}
-
-				socket.onclose = function() {
-					addMessage("Socket Status: " + socket.readyState + " (closed)");
-				}
-
-				socket.onmessage = function(msg) {
-                                          if (msg.data == 1) { $(".block").animate({"left": "-=5px"}, "fast"); }
-                                          if (msg.data == 2) { $(".block").animate({"top": "-=5px"}, "fast"); }
-                                          if (msg.data == 3) { $(".block").animate({"top": "+=5px"}, "fast"); }
-                                          if (msg.data == 4) { $(".block").animate({"left": "+=5px"}, "fast"); }
-                                          if (msg.data == 5) { ; }
-					addMessage("Received: " + msg.data);
-				}
-			} catch(exception) {
-				addMessage("Error: " + exception);
-			}
-		}
-		function addMessage(msg) {
-			$("#chat-log").append("<p>" + msg + "</p>");
-                        
-		}
-		function send() {
-			var text = name +"Вы нажмали на кнопку";
-			try {
-				socket.send(text);
-				addMessage("Sent: " + text)
-			} catch(exception) {
-				addMessage("Failed To Send")
-			}
-						}
-		$(function() {
-			connect();
-		});
-
-	</script>
+        <script src="http://code.jquery.com/jquery-latest.js"></script>
+	<script src="scripts/welcome.js"></script>
 		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %></p>
 		<p>
 			<%= link_to "Ваш профиль", persons_profile_path %>
 		</p>
 
 <div id="map" style="background-color:black; height:500px; width:500px; float:left; margin-right: 50px;">
-  <div class="block" style="position:absolute; background-color:white; height:15px; width:15px;"></div>
+  <div id="block" style="position:absolute; height:64px; width:64px;">
+    <img src="sprites/up.png" id="tank" up="sprites/up.png" left="sprites/left.png" right="sprites/right.png" down="sprites/down.png"></img>
+  </div>
 </div>
 <div id="chat-log_h"><h1>Лог</h1></div>
 <div id="chat-log" style="overflow: scroll;  height: 440px;"></div>

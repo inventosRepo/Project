@@ -31,7 +31,6 @@
 			$("#chat-log").append("<p>" + msg + "</p>");
 		}
                 function send() {
-			var text = "От: "+ name +" Вы нажмали на кнопку "+btn;
                         var button = btn_id;
 			try {
 	                    socket.send(button);
@@ -69,31 +68,38 @@
 		<%= link_to "введите код", code_new_path %></p>
 	<% end %>
   <script>
-    var btn, btn_id;
+<<<<<<< HEAD
+    var btn_id;
 		var moveSpeed = 300;
 		var fireSpeed = 700;
+=======
+    var btn;
+		var bonus = 1;
+		var moveSpeed = 300*bonus;
+		var fireSpeed = 700*bonus;
+>>>>>>> 3056e3bb897381f681a4cbefebf197b0053ff65d
 		document.getElementById("left").ontouchstart =  function(){
-		  var myInterval = setInterval(function() { btn = ' left'; btn_id = 1; send(); }, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 1; send(); }, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("top").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = ' top'; btn_id = 2; send()}, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 2; send()}, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("down").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = ' down'; btn_id = 3; send()}, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 3; send()}, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("right").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = ' right'; btn_id = 4; send()}, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 4; send()}, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("fire").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = ' fire'; btn_id = 5; send()}, fireSpeed);
+		  var myInterval = setInterval(function() { btn_id = 5; send()}, fireSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 

@@ -2,93 +2,98 @@
 <h1>Battle city</h1>
 <div>
 	<% if user_signed_in?%>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-      
-      var socket, host;
-      var name = '<%=current_user.email %>';
-      host = "ws://192.168.1.2:8080";
-      function connect() {	
-        try {
-          socket = new WebSocket(host);
-
-          addMessage("Socket State: " + socket.readyState);
-
-          socket.onopen = function() {
-            addMessage("Socket Status: " + socket.readyState + " (open)");
-          }
-
-          socket.onclose = function() {
-            addMessage("Socket Status: " + socket.readyState + " (closed)");
-          }
-
-          socket.onmessage = function(msg) {
-            addMessage("Received: " + msg.data);
-          }
-        } catch(exception) {
-          addMessage("Error: " + exception);
-        }
-      }
-      function addMessage(msg) {
-        $("#chat-log").append("<p>" + msg + "</p>");
-      }
-      function send() {
-        var text = "От: "+ name +" Вы нажмали на кнопку "+btn; 
-	 
-        try {  	               
-	  socket.send(text);
-        } catch(exception) {
-          addMessage("Failed To Send")
-        }
-              }
-      $(function() {
-        connect();
-      });
-      
-    </script>
-		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %></p>
+		<p>Вы вошли как <%=current_user.email %>
+			<%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+		</p>
 		<div id="keys">
-			<div id="left" style="width:200px; height:200px; background-color:blue; position: absolute; top: 250px;">Влево</div>
-			<div id="top" style="width:200px; height:200px; background-color:red; position: absolute; left: 205px; ">Вверх</div>
-			<div id="down" style="width:200px; height:200px; background-color:yellow; position: absolute; left: 205px; top: 350px;">Вниз</div>
-			<div id="right" style="width:200px; height:200px; background-color:green; position: absolute; left: 405px; top: 250px;">Вправо</div>
-			<div id="fire" style="width:605px; height:200px; background-color:black; position: absolute;  top: 550px;">Огонь</div>
+			<div id="left" style="width:200px; height:200px;position: absolute; top: 250px;">
+					<%= image_tag("left.png", width: '100%') %>
+			</div>
+			<div id="top" style="width:200px; height:200px; position: absolute; left: 205px; ">
+					<%= image_tag("up.png", width: '100%')%>
+			</div>
+			<div id="down" style="width:200px; height:200px; position: absolute; left: 205px; top: 350px;">
+					<%= image_tag("down.png", width: '100%') %>
+			</div>
+			<div id="right" style="width:200px; height:200px; position: absolute; left: 405px; top: 250px;">
+					<%= image_tag("right.png", width: '100%') %>
+			</div>
+			<div id="fire" style="width:300px; height:200px; position: absolute; top: 200px; left: 650px;">
+					<%= image_tag("fire.png", width: '100%') %>
+			</div>
 		</div>
-
 	<% else %>
 		<%= link_to "введите код", code_new_path %></p>
 	<% end %>
-<script>
-       		var btn;
-		document.getElementById("left").ontouchstart =  function(){      
-		  var myInterval = setInterval(function() { btn = ' left'; send()}, 120);
-		  this.ontouchend = function(){ clearInterval(myInterval); }
-	        }
-	
-	
-		document.getElementById("top").ontouchstart =  function(){      
-		  var myInterval = setInterval(function() {btn = ' top'; send()}, 120);
-		  this.ontouchend = function(){ clearInterval(myInterval); }
-	        }
-	
-	
-		document.getElementById("down").ontouchstart =  function(){      
-		  var myInterval = setInterval(function() {btn = ' down';send()}, 120);
-		  this.ontouchend = function(){ clearInterval(myInterval); }
-	        }
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>
+		var socket, host;
+		var name = '<%=current_user.email %>';
+		host = "ws://192.168.1.2:8080";
+		function connect() {
+			try {
+				socket = new WebSocket(host);
+				addMessage("Socket State: " + socket.readyState);
 
-		document.getElementById("right").ontouchstart =  function(){      
-		  var myInterval = setInterval(function() {btn=" right";send()}, 120);
+				socket.onopen = function() {
+					addMessage("Socket Status: " + socket.readyState + " (open)");
+				}
+
+				socket.onclose = function() {
+					addMessage("Socket Status: " + socket.readyState + " (closed)");
+				}
+
+				socket.onmessage = function(msg) {
+					addMessage("Received: " + msg.data);
+				}
+			} catch(exception) {
+				addMessage("Error: " + exception);
+			}
+		}
+		function addMessage(msg) {
+			$("#chat-log").append("<p>" + msg + "</p>");
+		}
+		function send() {
+			var text = "От: "+ name +" Вы нажмали на кнопку "+btn;
+			try {
+	socket.send(text);
+			} catch(exception) {
+				addMessage("Failed To Send")
+			}
+						}
+		$(function() {
+			connect();
+		});
+
+	</script>
+  <script>
+    var btn;
+		var moveSpeed = 30;
+		var fireSpeed = 70;
+		document.getElementById("left").ontouchstart =  function(){
+		  var myInterval = setInterval(function() { btn = ' left'; send()}, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
-	        }
-	
-	
-		document.getElementById("fire").onclick =  function(){      
-		  	btn = ' fire';
-			send();		  
-	        }
-	
-	
+	  }
+
+		document.getElementById("top").ontouchstart =  function(){
+		  var myInterval = setInterval(function() {btn = ' top'; send()}, moveSpeed);
+		  this.ontouchend = function(){ clearInterval(myInterval); }
+	  }
+
+		document.getElementById("down").ontouchstart =  function(){
+		  var myInterval = setInterval(function() {btn = ' down';send()}, moveSpeed);
+		  this.ontouchend = function(){ clearInterval(myInterval); }
+	  }
+
+		document.getElementById("right").ontouchstart =  function(){
+		  var myInterval = setInterval(function() {btn = " right";send()}, moveSpeed);
+		  this.ontouchend = function(){ clearInterval(myInterval); }
+	  }
+
+		document.getElementById("fire").ontouchstart =  function(){
+		  var myInterval = setInterval(function() {btn = " fire";send()}, fireSpeed);
+		  this.ontouchend = function(){ clearInterval(myInterval); }
+	  }
+
 </script>
 </div>
-

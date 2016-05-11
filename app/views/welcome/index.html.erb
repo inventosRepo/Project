@@ -2,63 +2,58 @@
 <h1>Battle city</h1>
 <div id="user_nav">
 	<% if user_signed_in?%>
-		<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-    <script>
-      var socket, host; var coor, coorY, coorX;
-      var name = '<%=current_user.email %>';
-      host = "ws://192.168.1.2:8080";
-      function connect() {
-	
-	
-        try {
-          socket = new WebSocket(host);
-	  
-	  
-          addMessage("Socket State: " + socket.readyState);
+	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
+	<script>
+		var socket, host; var coor, coorY, coorX;
+		var name = '<%=current_user.email %>';
+		host = "ws://192.168.1.2:8080";
+		function connect() {
+			try {
+				socket = new WebSocket(host);
+				addMessage("Socket State: " + socket.readyState);
 
-          socket.onopen = function() {
-            addMessage("Socket Status: " + socket.readyState + " (open)");
-          }
+				socket.onopen = function() {
+					addMessage("Socket Status: " + socket.readyState + " (open)");
+				}
 
-          socket.onclose = function() {
-            addMessage("Socket Status: " + socket.readyState + " (closed)");
-          }
+				socket.onclose = function() {
+					addMessage("Socket Status: " + socket.readyState + " (closed)");
+				}
 
-          socket.onmessage = function(msg) {           
-	    addMessage("Received: " + msg.data);
-	
-          }	
-        } catch(exception) {
-          addMessage("Error: " + exception);
-        }
-      }
-      function addMessage(msg) {
-        $("#chat-log").append("<p>" + msg + "</p>");
-	
-      }
-      function send() {
-        var text = name +"Вы нажмали на кнопку";       
-        try {
-          socket.send(text);
-          addMessage("Sent: " + text)
-        } catch(exception) {
-          addMessage("Failed To Send")
-        }
-              }
-      $(function() {
-        connect();
-      });
-      
-    </script>
-		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %></p> 
-		
-		<p><%= link_to "Ваш профиль", persons_profile_path %></p>
-		<div id="chat-log"></div>
-<div id="map" style="background-color:black; height:500px; width:500px";></div>
+				socket.onmessage = function(msg) {
+					addMessage("Received: " + msg.data);
+				}
+			} catch(exception) {
+				addMessage("Error: " + exception);
+			}
+		}
+		function addMessage(msg) {
+			$("#chat-log").append("<p>" + msg + "</p>");
+		}
+		function send() {
+			var text = name +"Вы нажмали на кнопку";
+			try {
+				socket.send(text);
+				addMessage("Sent: " + text)
+			} catch(exception) {
+				addMessage("Failed To Send")
+			}
+						}
+		$(function() {
+			connect();
+		});
+
+	</script>
+		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>		</p>
+		<p>
+			<%= link_to "Ваш профиль", persons_profile_path %>
+		</p>
+
+<div id="map" style="background-color:black; height:500px; width:500px; float:left; margin-right: 50px;" ></div>
+<div id="chat-log_h"><h1>Лог</h1></div>
+<div id="chat-log" style="overflow: scroll;  height: 440px;"></div>
 	<% else %>
-		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или 
+		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
 		<%= link_to "выполните вход", new_user_session_path %></p>
 	<% end %>
 </div>
-
-

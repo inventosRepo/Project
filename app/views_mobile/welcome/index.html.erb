@@ -68,9 +68,16 @@
 		<%= link_to "введите код", code_new_path %></p>
 	<% end %>
   <script>
+<<<<<<< HEAD
     var btn_id;
 		var moveSpeed = 300;
 		var fireSpeed = 700;
+=======
+    var btn;
+		var bonus = 1;
+		var moveSpeed = 300*bonus;
+		var fireSpeed = 700*bonus;
+>>>>>>> 3056e3bb897381f681a4cbefebf197b0053ff65d
 		document.getElementById("left").ontouchstart =  function(){
 		  var myInterval = setInterval(function() { btn_id = 1; send(); }, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }

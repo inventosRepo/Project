@@ -7,6 +7,7 @@ class PersonsController < ApplicationController
      a = ("a".."z").to_a
     @user = User.find_by(email: current_user.email);
     @user.code = a[1..6].shuffle.join;
+    @user.creatingtime = Time.now;
     @user.save;
   end
 

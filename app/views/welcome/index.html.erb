@@ -6,7 +6,7 @@
 	<script>
 		var socket, host; var coor, coorY, coorX;
 		var name = '<%=current_user.email %>';
-		host = "ws://192.168.1.2:3004";
+		host = "ws://192.168.1.80:3004";
 		function connect() {
 			try {
 				socket = new WebSocket(host);
@@ -21,6 +21,11 @@
 				}
 
 				socket.onmessage = function(msg) {
+                                          if (msg.data == 1) { $(".block").animate({"left": "-=5px"}, "fast"); }
+                                          if (msg.data == 2) { $(".block").animate({"top": "-=5px"}, "fast"); }
+                                          if (msg.data == 3) { $(".block").animate({"top": "+=5px"}, "fast"); }
+                                          if (msg.data == 4) { $(".block").animate({"left": "+=5px"}, "fast"); }
+                                          if (msg.data == 5) { ; }
 					addMessage("Received: " + msg.data);
 				}
 			} catch(exception) {
@@ -29,6 +34,7 @@
 		}
 		function addMessage(msg) {
 			$("#chat-log").append("<p>" + msg + "</p>");
+                        
 		}
 		function send() {
 			var text = name +"Вы нажмали на кнопку";
@@ -44,12 +50,14 @@
 		});
 
 	</script>
-		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>		</p>
+		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %></p>
 		<p>
 			<%= link_to "Ваш профиль", persons_profile_path %>
 		</p>
 
-<div id="map" style="background-color:black; height:500px; width:500px; float:left; margin-right: 50px;" ></div>
+<div id="map" style="background-color:black; height:500px; width:500px; float:left; margin-right: 50px;">
+  <div class="block" style="position:absolute; background-color:white; height:15px; width:15px;"></div>
+</div>
 <div id="chat-log_h"><h1>Лог</h1></div>
 <div id="chat-log" style="overflow: scroll;  height: 440px;"></div>
 	<% else %>

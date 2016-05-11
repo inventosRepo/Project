@@ -6,7 +6,7 @@
 	<script>
 		var socket, host;
 		var name = '<%=current_user.email %>';
-		host = "ws://192.168.1.2:3004";
+		host = "ws://192.168.1.80:3004";
 		function connect() {
 			try {
 				socket = new WebSocket(host);
@@ -30,10 +30,11 @@
 		function addMessage(msg) {
 			$("#chat-log").append("<p>" + msg + "</p>");
 		}
-		function send() {
-			var text = "От: "+ name +" Вы нажмали на кнопку "+btn;
+                function send() {
+                        var button = btn_id;
 			try {
-	socket.send(text);
+	                    socket.send(button);
+                            
 			} catch(exception) {
 				addMessage("Failed To Send")
 			}
@@ -48,50 +49,50 @@
 		</p>
 		<div id="keys">
 			<div id="left" style="width:200px; height:200px;position: absolute; top: 250px;">
-					<%= image_tag("left.png", width: '100%') %>
+					<%= image_submit_tag "left.png", width: '100%' %>
 			</div>
 			<div id="top" style="width:200px; height:200px; position: absolute; left: 205px; ">
-					<%= image_tag("up.png", width: '100%')%>
+					<%= image_submit_tag "up.png", width: '100%' %>
 			</div>
 			<div id="down" style="width:200px; height:200px; position: absolute; left: 205px; top: 350px;">
-					<%= image_tag("down.png", width: '100%') %>
+					<%= image_submit_tag "down.png", width: '100%' %>
 			</div>
 			<div id="right" style="width:200px; height:200px; position: absolute; left: 405px; top: 250px;">
-					<%= image_tag("right.png", width: '100%') %>
+					<%= image_submit_tag "right.png", width: '100%' %>
 			</div>
 			<div id="fire" style="width:300px; height:200px; position: absolute; top: 200px; left: 650px;">
-					<%= image_tag("fire.png", width: '100%') %>
+					<%= image_submit_tag "fire.png", width: '100%' %>
 			</div>
 		</div>
 	<% else %>
 		<%= link_to "введите код", code_new_path %></p>
 	<% end %>
   <script>
-    var btn;
-		var moveSpeed = 30;
-		var fireSpeed = 70;
+    var btn_id;
+		var moveSpeed = 300;
+		var fireSpeed = 700;
 		document.getElementById("left").ontouchstart =  function(){
-		  var myInterval = setInterval(function() { btn = ' left'; send()}, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 1; send(); }, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("top").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = ' top'; send()}, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 2; send()}, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("down").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = ' down';send()}, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 3; send()}, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("right").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = " right";send()}, moveSpeed);
+		  var myInterval = setInterval(function() { btn_id = 4; send()}, moveSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 
 		document.getElementById("fire").ontouchstart =  function(){
-		  var myInterval = setInterval(function() {btn = " fire";send()}, fireSpeed);
+		  var myInterval = setInterval(function() { btn_id = 5; send()}, fireSpeed);
 		  this.ontouchend = function(){ clearInterval(myInterval); }
 	  }
 

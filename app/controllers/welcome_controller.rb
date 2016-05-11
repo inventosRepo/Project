@@ -3,7 +3,7 @@ class WelcomeController < ApplicationController
   
   @clients = []
 
-  EM::WebSocket.start(:host => '192.168.1.2', :port => '8080') do |ws|
+  EM::WebSocket.start(:host => '192.168.1.2', :port => '3004') do |ws|
     ws.onopen do |handshake|
       @clients << ws
       ws.send "Connected"

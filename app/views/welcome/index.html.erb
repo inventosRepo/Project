@@ -6,7 +6,7 @@
 	<script>
 		var socket, host; var coor, coorY, coorX;
 		var name = '<%=current_user.email %>';
-		host = "ws://192.168.1.2:8080";
+		host = "ws://192.168.1.2:3004";
 		function connect() {
 			try {
 				socket = new WebSocket(host);

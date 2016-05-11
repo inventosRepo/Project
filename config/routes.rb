@@ -6,11 +6,12 @@ Rails.application.routes.draw do
   post "persons/profile"
   post "code/new"
   post "code/hi"
+  get "code/error"
   post "persons/generate"
   get 'welcome/index'
   get 'persons/profile'
   root 'welcome#index'
-  get 'welcome/chat'	
+  get 'welcome/chat'
   get 'welcome/index', as: 'user_root'
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'

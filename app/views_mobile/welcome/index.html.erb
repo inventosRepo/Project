@@ -2,34 +2,11 @@
 <h1>Battle city</h1>
 <div>
 	<% if user_signed_in?%>
-		<p>Вы вошли как <%=current_user.email %>
-			<%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
-		</p>
-		<div id="keys">
-			<div id="left" style="width:200px; height:200px;position: absolute; top: 250px;">
-					<%= image_tag("left.png", width: '100%') %>
-			</div>
-			<div id="top" style="width:200px; height:200px; position: absolute; left: 205px; ">
-					<%= image_tag("up.png", width: '100%')%>
-			</div>
-			<div id="down" style="width:200px; height:200px; position: absolute; left: 205px; top: 350px;">
-					<%= image_tag("down.png", width: '100%') %>
-			</div>
-			<div id="right" style="width:200px; height:200px; position: absolute; left: 405px; top: 250px;">
-					<%= image_tag("right.png", width: '100%') %>
-			</div>
-			<div id="fire" style="width:300px; height:200px; position: absolute; top: 200px; left: 650px;">
-					<%= image_tag("fire.png", width: '100%') %>
-			</div>
-		</div>
-	<% else %>
-		<%= link_to "введите код", code_new_path %></p>
-	<% end %>
 	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
 	<script>
 		var socket, host;
 		var name = '<%=current_user.email %>';
-		host = "ws://192.168.1.2:8080";
+		host = "ws://192.168.1.2:3004";
 		function connect() {
 			try {
 				socket = new WebSocket(host);
@@ -66,6 +43,29 @@
 		});
 
 	</script>
+		<p>Вы вошли как <%=current_user.email %>
+			<%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+		</p>
+		<div id="keys">
+			<div id="left" style="width:200px; height:200px;position: absolute; top: 250px;">
+					<%= image_tag("left.png", width: '100%') %>
+			</div>
+			<div id="top" style="width:200px; height:200px; position: absolute; left: 205px; ">
+					<%= image_tag("up.png", width: '100%')%>
+			</div>
+			<div id="down" style="width:200px; height:200px; position: absolute; left: 205px; top: 350px;">
+					<%= image_tag("down.png", width: '100%') %>
+			</div>
+			<div id="right" style="width:200px; height:200px; position: absolute; left: 405px; top: 250px;">
+					<%= image_tag("right.png", width: '100%') %>
+			</div>
+			<div id="fire" style="width:300px; height:200px; position: absolute; top: 200px; left: 650px;">
+					<%= image_tag("fire.png", width: '100%') %>
+			</div>
+		</div>
+	<% else %>
+		<%= link_to "введите код", code_new_path %></p>
+	<% end %>
   <script>
     var btn;
 		var moveSpeed = 30;

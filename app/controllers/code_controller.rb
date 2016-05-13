@@ -1,18 +1,15 @@
 class CodeController < ApplicationController
   def new
-
   end
+
   def hi
-    if(params[:code] == "" || User.find_by(code: params[:code]) == nil)
-      redirect_to code_error_path
+    if params[:code] == '' || !User.exists?(code: params[:code])
+      flash[:error] = 'Wrong code. Please try again'
+      redirect_to code_new_path
     else
-      sign_in(:user, User.find_by(code: params[:code]));
-      @user =  User.find_by(code: params[:code]);      
-      @user.code = nil;
-      @user.save;
+      @user = User.where(code: params[:code]).take
+      sign_in(:user, @user)
+      User.remove_code(@user)
     end
-  end
-  def error
-
   end
 end

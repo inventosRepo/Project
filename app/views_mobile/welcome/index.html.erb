@@ -6,7 +6,7 @@
 	<script>
 		var socket, host;
 		var name = '<%=current_user.email %>';
-		host = "ws://192.168.1.80:3004";
+		host = "ws://192.168.1.2:3004";
 		function connect() {
 			try {
 				socket = new WebSocket(host);
@@ -34,7 +34,7 @@
                         var button = btn_id;
 			try {
 	                    socket.send(button);
-                            
+
 			} catch(exception) {
 				addMessage("Failed To Send")
 			}

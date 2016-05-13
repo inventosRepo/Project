@@ -1,27 +1,10 @@
 
 <h1>Battle city</h1>
-<head>
-<style>
-  .container {    
-    margin: 20px auto;
-    overflow: hidden;
-    position: relative;
-    width: 800px;
-  }
-  #scene {
-    background-color: #f3f4ef; border: 1px solid #dedede; padding: 5px;
-    position:relative;
-  }
-</style>
-</head>
 <div id="user_nav">
 	<% if user_signed_in?%>
-	<script src="//ajax.googleapis.com/ajax/libs/jquery/1.9.1/jquery.min.js"></script>
-        <script src="http://code.jquery.com/jquery-latest.js"></script>
-	<script src="scripts/welcome.js"></script>
 		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %></p>
 		<p>
-			<%= link_to "Ваш профиль", persons_profile_path %>
+			<%= link_to "Ваш профиль", profile_persons_path %>
 		</p>
 
 <div id="map" style="background-color:black; height:500px; width:500px; float:left; margin-right: 50px;">

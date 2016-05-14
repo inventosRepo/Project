@@ -1,0 +1,60 @@
+#map{
+  background-color:black;
+  height:500px;
+  width:500px;
+  float:left;
+  margin-right: 50px;
+}
+
+#block{
+  position:absolute;
+  height:64px;
+  width:64px;
+}
+
+#chat-log{
+  overflow: scroll;
+  height: 440px;
+}
+
+.btn_dir input{
+  width: 100%;
+}
+
+#left{
+  width:20%;
+  height:20%;
+  position: absolute;
+  top: 30%;
+}
+
+#top{
+  width:20%;
+  height:20%;
+  position: absolute;
+  left: 20%;
+}
+
+#right{
+  width:20%;
+  height:20%;
+  position: absolute;
+  left: 38%;
+  top: 30%;
+}
+
+#down{
+  width:20%;
+  height:20%;
+  position: absolute;
+  left: 20%;
+  top: 50%;
+}
+
+#fire{
+  width:30%;
+  height:30%;
+  position: absolute;
+  top: 10%;
+  left: 65%;
+}

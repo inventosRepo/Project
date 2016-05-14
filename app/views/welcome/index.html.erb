@@ -1,19 +1,22 @@
-
 <h1>Battle city</h1>
 <div id="user_nav">
 	<% if user_signed_in?%>
-		<p>Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %></p>
+		<p>
+			Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+		</p>
 		<p>
 			<%= link_to "Ваш профиль", profile_persons_path %>
 		</p>
 
-<div id="map" style="background-color:black; height:500px; width:500px; float:left; margin-right: 50px;">
-  <div id="block" style="position:absolute; height:64px; width:64px;">
+<div id="map">
+  <div id="block">
     <img src="sprites/up.png" id="tank" up="sprites/up.png" left="sprites/left.png" right="sprites/right.png" down="sprites/down.png"></img>
   </div>
 </div>
-<div id="chat-log_h"><h1>Лог</h1></div>
-<div id="chat-log" style="overflow: scroll;  height: 440px;"></div>
+<div id="chat-log_h">
+	<h1>Лог</h1>
+</div>
+<div id="chat-log"></div>
 	<% else %>
 		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
 		<%= link_to "выполните вход", new_user_session_path %></p>

@@ -1,8 +1,5 @@
-var socket, ip, port, host;
-var name = '<%=current_user.email %>';
-ip = '192.168.1.2';
-port = '3004';
-host = "ws://" + ip + ":" + port;
+var socket,host;
+host = "ws://" +ip + ":" + port;
 function connect() {
   try {
     socket = new WebSocket(host);

@@ -17,6 +17,11 @@
 					<%= image_submit_tag "fire.png"%>
 			</div>
 		</div>
+		<script>
+			var name = '<%=current_user.email %>';
+			var ip = '<%=APP_CONFIG[:ws_ip]%>';
+			var port = '<%=APP_CONFIG[:ws_port]%>';
+		</script>
 		<script src="scripts/direction.js"></script>
 	<% else %>
 		<%= link_to "введите код", code_new_path %></p>

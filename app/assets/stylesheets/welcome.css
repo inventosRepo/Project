@@ -19,6 +19,7 @@
 
 .btn_dir input{
   width: 100%;
+  pointer-events: none;
 }
 
 #left{
@@ -33,6 +34,7 @@
   height:20%;
   position: absolute;
   left: 20%;
+  top:5%
 }
 
 #right{
@@ -55,6 +57,25 @@
   width:30%;
   height:30%;
   position: absolute;
-  top: 10%;
+  top: 17%;
   left: 65%;
+}
+
+
+@media (max-width: 480px) {
+  #left{
+    top: 20%;
+  }
+
+  #right{
+    top: 20%;
+  }
+
+  #fire{
+    top: 15%;
+  }
+
+  #down{
+    top:35%;
+  }
 }

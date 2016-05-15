@@ -17,6 +17,12 @@
 	<h1>Лог</h1>
 </div>
 <div id="chat-log"></div>
+<script>
+	var name = '<%=current_user.email %>';
+	var ip = '<%=APP_CONFIG[:ws_ip]%>';
+	var port = '<%=APP_CONFIG[:ws_port]%>';
+</script>
+<script src="scripts/welcome.js"></script>
 	<% else %>
 		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
 		<%= link_to "выполните вход", new_user_session_path %></p>

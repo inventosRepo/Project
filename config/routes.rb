@@ -1,8 +1,9 @@
 Rails.application.routes.draw do
   devise_for :users
-  root 'welcome#index'
-  get 'welcome/index', as: 'user_root'
+  root 'welcome#index', as: 'user_root'
+
   post 'code/hi'
+  get 'code/hi'
   post 'code/new'
   get 'code/new'
 

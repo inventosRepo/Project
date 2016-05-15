@@ -2,4 +2,4 @@
 <p>Ваш логин <%=current_user.email %></p>
 <p>Ваш код: <%=current_user.code %></p>
 <%= button_to "CODE", generate_persons_path %>
-<p><%= link_to "Вернутся на главную", root_path %></p>
+<p><%= link_to "Вернутся на главную", user_root_path %></p>

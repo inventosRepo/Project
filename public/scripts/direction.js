@@ -1,6 +1,6 @@
   window.onload = function(){
     var socket, host;
-    host = "ws://" +ip + ":" + port;
+    host = "ws://"+ip+":"+port;
     function connect() {
       try {
         socket = new WebSocket(host);

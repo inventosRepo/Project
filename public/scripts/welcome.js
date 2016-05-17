@@ -129,8 +129,8 @@ $(function() {
 
 
   setInterval(drawScene, 50);
-  setInterval(NpcMovement, 1500);
-  setInterval(NpcShot, 2000);
+  setInterval(NpcMovement, 700);
+  setInterval(NpcShot, 1500);
   setInterval(movebullets, 50);
   setInterval(movenpcbullets, 50);
 

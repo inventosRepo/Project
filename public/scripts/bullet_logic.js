@@ -1,20 +1,41 @@
-function movebullets()
-{
-    for (var i = 0; i < bullets.length; i++) {
-        if (bullets[i].direct==2){
-            bullets[i].bullY-=10;
+function movebullets() {
+  switch (player) {
+    case 1:
+    for (var i = 0; i < bullets_1.length; i++) {
+        if (bullets_1[i].direct==2){
+            bullets_1[i].bullY-=10;
         }
-        else if (bullets[i].direct==3) {
-            bullets[i].bullY+=10;
+        else if (bullets_1[i].direct==3) {
+            bullets_1[i].bullY+=10;
         }
-        else if (bullets[i].direct==0) {
-            bullets[i].bullX+=10;
+        else if (bullets_1[i].direct==0) {
+            bullets_1[i].bullX+=10;
         }
-        else if (bullets[i].direct==1) {
-            bullets[i].bullX-=10;
+        else if (bullets_1[i].direct==1) {
+            bullets_1[i].bullX-=10;
         }
         bulletCollision(i);
     }
+    break;
+
+    case 2:
+    for (var i = 0; i < bullets_2.length; i++) {
+        if (bullets_2[i].direct==2){
+            bullets_2[i].bullY-=10;
+        }
+        else if (bullets_2[i].direct==3) {
+            bullets_2[i].bullY+=10;
+        }
+        else if (bullets_2[i].direct==0) {
+            bullets_2[i].bullX+=10;
+        }
+        else if (bullets_2[i].direct==1) {
+            bullets_2[i].bullX-=10;
+        }
+        bulletCollision(i);
+    }
+    break;
+  }
 }
 
 function movenpcbullets()
@@ -37,30 +58,61 @@ function movenpcbullets()
 }
 
 function bulletCollision(i) {
-    bullet_cell_x = parseInt(bullets[i].bullX/CellSize);
-    bullet_cell_y = parseInt(bullets[i].bullY/CellSize);
-    tank_cell_x = parseInt(_Tank.x/CellSize);
-    tank_cell_y = parseInt(_Tank.y/CellSize);
+  switch (player) {
+    case 1:
+    bullet_1_cell_x = parseInt(bullets_1[i].bullX/CellSize);
+    bullet_1_cell_y = parseInt(bullets_1[i].bullY/CellSize);
+    tank_1_cell_x = parseInt(_Tank_1.x/CellSize);
+    tank_1_cell_y = parseInt(_Tank_1.y/CellSize);
 
-    if (bullet_cell_x < 0) {
-      bullet_cell_x = 0;
+    if (bullet_1_cell_x < 0) {
+      bullet_1_cell_x = 0;
     }
-    if (bullet_cell_x > CellSize * (_X_count-2)) {
-      bullet_cell_x = CellSize * (_X_count-2);
+    if (bullet_1_cell_x > CellSize * (_X_count-2)) {
+      bullet_1_cell_x = CellSize * (_X_count-2);
     }
-    if (bullet_cell_y < 0) {
-      bullet_cell_y = 0;
+    if (bullet_1_cell_y < 0) {
+      bullet_1_cell_y = 0;
     }
-    if (bullet_cell_y > CellSize * (_Y_count-2)) {
-      bullet_cell_y = CellSize * (_Y_count-2);
+    if (bullet_1_cell_y > CellSize * (_Y_count-2)) {
+      bullet_1_cell_y = CellSize * (_Y_count-2);
     }
-    if(_Map[bullet_cell_y][bullet_cell_x]==1) {
-      _Map[bullet_cell_y][bullet_cell_x]=0;
-      bullets.splice(i, 1);
+    if(_Map[bullet_1_cell_y][bullet_1_cell_x]==1) {
+      _Map[bullet_1_cell_y][bullet_1_cell_x]=0;
+      bullets_1.splice(i, 1);
     }
-    if(_Map[bullet_cell_y][bullet_cell_x]==2) {
-      bullets.splice(i, 1);
+    if(_Map[bullet_1_cell_y][bullet_1_cell_x]==2) {
+      bullets_1.splice(i, 1);
     }
+    break;
+
+    case 2:
+    bullet_2_cell_x = parseInt(bullets_2[i].bullX/CellSize);
+    bullet_2_cell_y = parseInt(bullets_2[i].bullY/CellSize);
+    tank_2_cell_x = parseInt(_Tank_2.x/CellSize);
+    tank_2_cell_y = parseInt(_Tank_2.y/CellSize);
+
+    if (bullet_2_cell_x < 0) {
+      bullet_2_cell_x = 0;
+    }
+    if (bullet_2_cell_x > CellSize * (_X_count-2)) {
+      bullet_2_cell_x = CellSize * (_X_count-2);
+    }
+    if (bullet_2_cell_y < 0) {
+      bullet_2_cell_y = 0;
+    }
+    if (bullet_2_cell_y > CellSize * (_Y_count-2)) {
+      bullet_2_cell_y = CellSize * (_Y_count-2);
+    }
+    if(_Map[bullet_2_cell_y][bullet_2_cell_x]==1) {
+      _Map[bullet_2_cell_y][bullet_2_cell_x]=0;
+      bullets_2.splice(i, 1);
+    }
+    if(_Map[bullet_2_cell_y][bullet_2_cell_x]==2) {
+      bullets_2.splice(i, 1);
+    }
+    break;
+  }
 }
 
 function npc_bulletCollision(i) {

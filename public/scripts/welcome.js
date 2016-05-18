@@ -67,6 +67,7 @@ function drawScene() {
   context.restore();
 
   context.drawImage(_Tank.image, _Tank.i*_Tank.w, 0, _Tank.w, _Tank.h, _Tank.x, _Tank.y, _Tank.w, _Tank.h);
+  context.drawImage(_TankP2.image, _TankP2.i*_TankP2.w, 0, _TankP2.w, _TankP2.h, _TankP2.x, _TankP2.y, _TankP2.w, _TankP2.h);
   context.drawImage(_Tank_NPC.image, _Tank_NPC.i*_Tank_NPC.w, 0, _Tank_NPC.w, _Tank_NPC.h, _Tank_NPC.x, _Tank_NPC.y, _Tank_NPC.w, _Tank_NPC.h);
   for (var i = 0; i < bullets.length; i++) {
     context.drawImage(imgBullet, bullets[i].bullX,  bullets[i].bullY);
@@ -126,6 +127,7 @@ $(function() {
   imgTank.src = 'images/tank.png';
   _Tank_NPC = new Tank(CellSize*12, CellSize*0, 48, 48, imgTank)
   _Tank = new Tank(CellSize*12, CellSize*24, 48, 48, imgTank);
+  _TankP2 = new Tank(CellSize*12, CellSize*12, 48, 48, imgTank);
 
 
   setInterval(drawScene, 50);

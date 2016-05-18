@@ -6,10 +6,12 @@ Rails.application.routes.draw do
   get 'code/hi'
   post 'code/new'
   get 'code/new'
-
+  post 'welcome/new'
+  post 'welcome/connecting'
   resources :welcome do
     member do
       post 'index'
+      post 'new'
     end
   end
 

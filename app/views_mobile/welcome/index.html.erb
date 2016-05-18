@@ -7,6 +7,7 @@
 <div>
 	<% if user_signed_in?%>
 		<div id="keys">
+			<%=@players.playersid %>
 			<div id="left" class="btn_dir">
 					<%= image_submit_tag "left.png" %>
 			</div>

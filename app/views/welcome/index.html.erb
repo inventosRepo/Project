@@ -1,3 +1,14 @@
+<script>
+	var name = '<%=current_user.email %>';
+	var ip = '<%=APP_CONFIG[:ws_ip]%>';
+	var port = '<%=APP_CONFIG[:ws_port]%>';
+</script>
+<script type="text/javascript" src="scripts/levels.js"></script>
+<script type="text/javascript" src="scripts/player_logic.js"></script>
+<script type="text/javascript" src="scripts/bullet_logic.js"></script>
+<script type="text/javascript" src="scripts/npc_logic.js"></script>
+<script src="scripts/game.js"></script>
+
 <h1>Battle city</h1>
 <div id="user_nav">
 	<% if user_signed_in?%>
@@ -8,22 +19,33 @@
 			<%= link_to "Ваш профиль", profile_persons_path %>
 		</p>
 
-<div align=left><canvas id="map" width="800" height="600"></canvas></div>
-<div id="chat-log_h">
-	<h1>Лог</h1>
-</div>
-<div id="chat-log"></div>
-<script>
-	var name = '<%=current_user.email %>';
-	var ip = '<%=APP_CONFIG[:ws_ip]%>';
-	var port = '<%=APP_CONFIG[:ws_port]%>';
-</script>
-<script type="text/javascript" src="scripts/npc_logic.js"></script>
-<script type="text/javascript" src="scripts/bullet_logic.js"></script>
-<script type="text/javascript" src="scripts/player_logic.js"></script>
-<script src="scripts/welcome.js"></script>
-	<% else %>
-		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
-		<%= link_to "выполните вход", new_user_session_path %></p>
-	<% end %>
-</div>
+		<%= button_to "Создать", new_welcome_path %>
+    <div style ="float:left">
+			<h2>Доступные игры</h2>
+			<% @games.each do |game| %>
+				<ul>
+					<li>
+						<%= game.player1 %>
+						<%= button_to "присоединится", welcome_connecting_path(:currentgame => game.player1) %>
+					</li>
+				</ul>
+			<% end %>
+		</div>
+		<div style ="margin-left: 20%">
+		<h2>Идет игра</h2>
+			<% @ingames.each do |game| %>
+				<ul>
+					<li><%= game.player1 %></li>
+				</ul>
+			<% end %>
+		</div>
+
+		<div style="clear:both"></div>
+
+		<div><canvas align="center" id="map" width="600" height="600"></canvas></div>
+
+		<% else %>
+			<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
+			<%= link_to "выполните вход", new_user_session_path %></p>
+		<% end %>
+	</div>

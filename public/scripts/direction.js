@@ -9,6 +9,10 @@
     function connect(player) {
       try {
         socket[player] = new WebSocket(host);
+
+        socket[player].onopen = function () {
+          socket.send(player);
+        }
       } catch(exception) {
         addMessage("Error: " + exception);
       }
@@ -16,8 +20,9 @@
 
     function send(player) {
       var button = btn_id;
+      var data = player*10+btn_id;
       try {
-        socket[player].send(button);
+        socket[player].send(data);
       } catch (exception) {
         addMessage("Failed To Send")
       }

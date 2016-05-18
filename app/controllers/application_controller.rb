@@ -40,14 +40,6 @@ EM::WebSocket.start(host: @ip, port: @port) do |ws|
     @clients.delete ws
   end
 
-  ws.onpong do |value|
-    puts "Received pong: #{value}"
-  end
-
-  ws.onping do |value|
-    puts "Received ping: #{value}"
-  end
-
   ws.onmessage do |msg|
     puts "Received Message: #{msg}"
     @clients.each do |socket|

@@ -58,24 +58,27 @@ function movenpcbullets()
 }
 
 function bulletCollision(i) {
+  tank_1_cell_x = parseInt(_Tank_1.x/CellSize);
+  tank_1_cell_y = parseInt(_Tank_1.y/CellSize);
+  tank_2_cell_x = parseInt(_Tank_2.x/CellSize);
+  tank_2_cell_y = parseInt(_Tank_2.y/CellSize);
+
   switch (player) {
     case 1:
     bullet_1_cell_x = parseInt(bullets_1[i].bullX/CellSize);
     bullet_1_cell_y = parseInt(bullets_1[i].bullY/CellSize);
-    tank_1_cell_x = parseInt(_Tank_1.x/CellSize);
-    tank_1_cell_y = parseInt(_Tank_1.y/CellSize);
 
     if (bullet_1_cell_x < 0) {
-      bullet_1_cell_x = 0;
+      bullets_1.splice(i, 1);
     }
-    if (bullet_1_cell_x > CellSize * (_X_count-2)) {
-      bullet_1_cell_x = CellSize * (_X_count-2);
+    if (bullet_1_cell_x > 25) {
+      bullets_1.splice(i, 1);
     }
     if (bullet_1_cell_y < 0) {
-      bullet_1_cell_y = 0;
+      bullets_1.splice(i, 1);
     }
-    if (bullet_1_cell_y > CellSize * (_Y_count-2)) {
-      bullet_1_cell_y = CellSize * (_Y_count-2);
+    if (bullet_1_cell_y > 26) {
+      bullets_1.splice(i, 1);
     }
     if(_Map[bullet_1_cell_y][bullet_1_cell_x]==1) {
       _Map[bullet_1_cell_y][bullet_1_cell_x]=0;
@@ -84,25 +87,28 @@ function bulletCollision(i) {
     if(_Map[bullet_1_cell_y][bullet_1_cell_x]==2) {
       bullets_1.splice(i, 1);
     }
+    if((bullet_1_cell_y==tank_2_cell_y) && (bullet_1_cell_x==tank_2_cell_x)) {
+      _Tank_2.image = imgBrokenTank;
+      player_2_live = false;
+      bullets_1.splice(i, 1);
+    }
     break;
 
     case 2:
     bullet_2_cell_x = parseInt(bullets_2[i].bullX/CellSize);
     bullet_2_cell_y = parseInt(bullets_2[i].bullY/CellSize);
-    tank_2_cell_x = parseInt(_Tank_2.x/CellSize);
-    tank_2_cell_y = parseInt(_Tank_2.y/CellSize);
 
     if (bullet_2_cell_x < 0) {
-      bullet_2_cell_x = 0;
+      bullets_2.splice(i, 1);
     }
-    if (bullet_2_cell_x > CellSize * (_X_count-2)) {
-      bullet_2_cell_x = CellSize * (_X_count-2);
+    if (bullet_2_cell_x > 24) {
+      bullets_2.splice(i, 1);
     }
     if (bullet_2_cell_y < 0) {
-      bullet_2_cell_y = 0;
+      bullets_2.splice(i, 1);
     }
-    if (bullet_2_cell_y > CellSize * (_Y_count-2)) {
-      bullet_2_cell_y = CellSize * (_Y_count-2);
+    if (bullet_2_cell_y > 24) {
+      bullets_2.splice(i, 1);
     }
     if(_Map[bullet_2_cell_y][bullet_2_cell_x]==1) {
       _Map[bullet_2_cell_y][bullet_2_cell_x]=0;

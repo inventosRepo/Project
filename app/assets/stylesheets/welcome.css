@@ -6,15 +6,15 @@
   margin-right: 50px;
 }
 
+#chat-log{
+  overflow: scroll;
+  height: 440px;
+}
+
 #block{
   position:absolute;
   height:64px;
   width:64px;
-}
-
-#chat-log{
-  overflow: scroll;
-  height: 440px;
 }
 
 .btn_dir input{

@@ -1,4 +1,4 @@
-var player = 0;
+var player = 1;
 // player_1_variables
 var _Tank_1; _Tank_2, _Tank_NPC;
 var bullets_1 = [];
@@ -23,8 +23,8 @@ var _X_count = 26;
 var _Y_count = 26;
 
 // connection_variables
-var socket;
 var host = "ws://"+ip+":"+port;
+var socket = new WebSocket (host);
 
 // Objects
 function Tank(x, y, w, h, image) {
@@ -148,6 +148,5 @@ $(function() {
   //setInterval(NpcShot, 1500);
   setInterval(movebullets, 50);
   //setInterval(movenpcbullets, 50);
-
-  connect();
+  setInterval(connect, 300);
 });

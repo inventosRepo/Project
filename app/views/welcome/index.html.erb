@@ -7,28 +7,6 @@
 		<p>
 			<%= link_to "Ваш профиль", profile_persons_path %>
 		</p>
-		<%= button_to "Создать", new_welcome_path %>
-    <div style ="float:left">
-			<h2>Доступные игры</h2>
-			<% @games.each do |game| %>
-				<ul>
-					<li>
-						<%= game.player1 %>
-						<%= button_to "присоединится", welcome_connecting_path(:currentgame => game.player1) %>
-					</li>
-				</ul>
-			<% end %>
-		</div>
-		<div style ="float:left">
-		<h2>Идет игра</h2>
-			<% @ingames.each do |game| %>
-				<ul>
-					<li><%= game.player1 %></li>
-				</ul>
-			<% end %>
-		</div>
-
-		<div style="clear:both"></div>
 
 <div align=left><canvas id="map" width="800" height="600"></canvas></div>
 <div id="chat-log_h">
@@ -40,9 +18,9 @@
 	var ip = '<%=APP_CONFIG[:ws_ip]%>';
 	var port = '<%=APP_CONFIG[:ws_port]%>';
 </script>
-<script type="text/javascript" src="scripts/player_logic.js"></script>
 <script type="text/javascript" src="scripts/npc_logic.js"></script>
 <script type="text/javascript" src="scripts/bullet_logic.js"></script>
+<script type="text/javascript" src="scripts/player_logic.js"></script>
 <script src="scripts/welcome.js"></script>
 	<% else %>
 		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или

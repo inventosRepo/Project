@@ -81,7 +81,14 @@ function bulletCollision(i) {
       bullets_1.splice(i, 1);
     }
     if(_Map[bullet_1_cell_y][bullet_1_cell_x]==1) {
-      _Map[bullet_1_cell_y][bullet_1_cell_x]=0;
+      if ((bullets_1[i].direct == 0) || (bullets_1[i].direct == 1)) {
+        _Map[bullet_1_cell_y][bullet_1_cell_x]=0;
+        _Map[bullet_1_cell_y+1][bullet_1_cell_x]=0;
+      }
+      if ((bullets_1[i].direct == 2) || (bullets_1[i].direct == 3)) {
+        _Map[bullet_1_cell_y][bullet_1_cell_x]=0;
+        _Map[bullet_1_cell_y][bullet_1_cell_x+1]=0;
+      }
       bullets_1.splice(i, 1);
     }
     if(_Map[bullet_1_cell_y][bullet_1_cell_x]==2) {

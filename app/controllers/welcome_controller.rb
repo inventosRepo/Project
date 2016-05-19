@@ -25,7 +25,7 @@ class WelcomeController < ApplicationController
       @currentmail = params[:currentgame]
       @field = Field.where(player1: @currentmail).take
       @field.player2 = current_user.email
-      @field.count = 2      
+      @field.count = 2
       @field.save
 
       @user = User.where(email: current_user.email).take

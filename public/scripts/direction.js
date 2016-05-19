@@ -31,29 +31,17 @@
     $(function() {
       connect(player);
 
-      document.getElementById("left").ontouchstart =  function(){
-        var myInterval = setInterval(function() { btn_id = 1; send(player); }, moveSpeed);
-        this.ontouchend = function(){ clearInterval(myInterval); }
-      }
-
-      document.getElementById("top").ontouchstart =  function(){
-        var myInterval = setInterval(function() { btn_id = 2; send(player); }, moveSpeed);
-        this.ontouchend = function(){ clearInterval(myInterval); }
-      }
-
-      document.getElementById("down").ontouchstart =  function(){
-        var myInterval = setInterval(function() { btn_id = 3; send(player); }, moveSpeed);
-        this.ontouchend = function(){ clearInterval(myInterval); }
-      }
-
-      document.getElementById("right").ontouchstart =  function(){
-        var myInterval = setInterval(function() { btn_id = 4; send(player); }, moveSpeed);
-        this.ontouchend = function(){ clearInterval(myInterval); }
-      }
-
-      document.getElementById("fire").ontouchstart =  function(){
-        var myInterval = setInterval(function() { btn_id = 5; send(player); }, fireSpeed);
-        this.ontouchend = function(){ clearInterval(myInterval); }
-      }
+	function btnEvent(id, bt_id,speed){
+		document.getElementById(id).ontouchstart =  function(){
+		var myInterval = setInterval(function() { btn_id = bt_id; send(player); }, speed);
+		this.ontouchend = function(){ clearInterval(myInterval); }
+		}
+	}
+	btnEvent("left", 1, moveSpeed);
+	btnEvent("top", 2, moveSpeed);
+	btnEvent("down", 3, moveSpeed);
+	btnEvent("right", 4, moveSpeed);
+	btnEvent("fire", 5, fireSpeed)
+     
     });
 }

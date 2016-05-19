@@ -9,26 +9,26 @@
 		<div id="keys">
 			<%=@players.playersid %>
 			<div id="left" class="btn_dir">
-					<%= image_submit_tag "left.png" %>
+					
 			</div>
 			<div id="top" class="btn_dir">
-					<%= image_submit_tag "up.png"%>
+					
 			</div>
 			<div id="down" class="btn_dir">
-					<%= image_submit_tag "down.png"%>
+					
 			</div>
 			<div id="right" class="btn_dir">
-					<%= image_submit_tag "right.png"%>
+					
 			</div>
 			<div id="fire" class="btn_dir">
-					<%= image_submit_tag "fire.png"%>
+					
 			</div>
 		</div>
 		<script>
 			var name = '<%=current_user.email %>';
 			var ip = '<%=APP_CONFIG[:ws_ip]%>';
 			var port = '<%=APP_CONFIG[:ws_port]%>';
-			var player = '<%=current_user.id %>';
+			var player = '<%=@players.playersid %>';
 		</script>
 		<script src="scripts/direction.js"></script>
 	<% else %>

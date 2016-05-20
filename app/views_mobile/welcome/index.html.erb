@@ -1,13 +1,8 @@
-<html>
-<head>
-	<meta name="apple-mobile-web-app-capable" content="yes">
-	<title> Buttons </title>
-</head>
-<body>
 <div>
 	<% if user_signed_in?%>
+	<%=@players.playersid %>
 		<div id="keys">
-			<%=@players.playersid %>
+
 			<div id="left" class="btn_dir"></div>
 			<div id="top" class="btn_dir"></div>
 			<div id="down" class="btn_dir"></div>
@@ -25,5 +20,5 @@
 		<%= link_to "введите код", code_new_path %></p>
 	<% end %>
 </div>
-</body>
-</html>
+<div onclick="enterFullscreen()" id="btn_fs">На весь экран</div>
+<script src="scripts/fullscreen.js"></script>

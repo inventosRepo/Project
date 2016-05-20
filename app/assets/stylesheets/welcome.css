@@ -1,3 +1,22 @@
+:-webkit-full-screen{
+  background: white;
+}
+
+:-moz-full-screen {
+  background: white;
+}
+
+:full-screen {
+  background: white;
+}
+
+#btn_fs{
+  position:absolute;
+  color: white;
+  left: 60%;
+  top: 1%;
+  background-color:black;
+}
 #map{
   background-color:black;
   height:600px;
@@ -23,13 +42,14 @@
 }
 
 #left{
+  left: 1%;
   width:30%;
   height:30%;
   position: absolute;
   top: 30%;
   background-image: url(left.png);
   background-size: contain;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 }
 
 #top{
@@ -40,18 +60,18 @@
   top:5%;
   background-image: url(up.png);
   background-size: contain;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 }
 
 #right{
   width:30%;
   height:30%;
   position: absolute;
-  left: 38%;
+  left: 39%;
   top: 30%;
   background-image: url(right.png);
   background-size: contain;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 }
 
 #down{
@@ -62,7 +82,7 @@
   top: 50%;
   background-image: url(down.png);
   background-size: contain;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 }
 
 #fire{
@@ -73,13 +93,14 @@
   left: 65%;
   background-image: url(fire.png);
   background-size: contain;
-  background-repeat: no-repeat; 
+  background-repeat: no-repeat;
 }
 
 
 @media (max-width: 480px) {
   #left{
     top: 20%;
+    left: 1%;
     width:20%;
     height:20%;
   }
@@ -106,4 +127,5 @@
     width:20%;
     height:20%;
   }
+
 }

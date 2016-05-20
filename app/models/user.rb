@@ -8,9 +8,9 @@ class User < ActiveRecord::Base
     user.save
   end
 
-  def self.generate_code(user)
-    a = ('a'..'z').to_a
-    user.code = a[1..6].shuffle.join
+  def self.generate_code(user)	
+    code = ['a'..'z','A'..'Z','0'..'9'].map{ |range| range.to_a }.flatten
+    user.code = (0...6).map{ code[ rand(code.size) ] }.join
     user.creatingtime = Time.now
     user.save
   end

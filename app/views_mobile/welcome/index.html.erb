@@ -1,24 +1,30 @@
 <div>
 	<% if user_signed_in?%>
-	<%=@players.playersid %>
+	<script>
+		var name = '<%=current_user.email %>';
+		var ip = '<%=APP_CONFIG[:ws_ip]%>';
+		var port = '<%=APP_CONFIG[:ws_port]%>';
+		var player = '<%=@players.playersid %>';
+	</script>
+	<%=@players.playersid %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
 		<div id="keys">
-
 			<div id="left" class="btn_dir"></div>
 			<div id="top" class="btn_dir"></div>
 			<div id="down" class="btn_dir"></div>
 			<div id="right" class="btn_dir"></div>
 			<div id="fire" class="btn_dir"></div>
 		</div>
-		<script>
-			var name = '<%=current_user.email %>';
-			var ip = '<%=APP_CONFIG[:ws_ip]%>';
-			var port = '<%=APP_CONFIG[:ws_port]%>';
-			var player = '<%=@players.playersid %>';
-		</script>
-		<script src="scripts/direction.js"></script>
+		<div onclick="enterFullscreen()" id="btn_fs">На весь экран</div>
 	<% else %>
-		<%= link_to "введите код", code_new_path %></p>
+  <%=form_tag code_hi_path do |f| %>
+	   <label for="code">Введите код</label>
+	   <%= text_field_tag :code %>
+	   <%= submit_tag "Подтвердить" %>
+	<% end %>
+	<% if flash[:error] %>
+	  <div class="notice"><%= flash[:error] %></div>
+	<% end %>
 	<% end %>
 </div>
-<div onclick="enterFullscreen()" id="btn_fs">На весь экран</div>
 <script src="scripts/fullscreen.js"></script>
+<script src="scripts/direction.js"></script>

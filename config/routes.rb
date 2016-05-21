@@ -8,6 +8,7 @@ Rails.application.routes.draw do
   get 'code/new'
   post 'welcome/new'
   post 'welcome/connecting'
+  post 'welcome/disconnect'
   resources :welcome do
     member do
       post 'index'

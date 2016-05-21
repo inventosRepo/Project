@@ -10,10 +10,7 @@ default: &default
 development:
   <<: *default
   database: auth_development
-  test:
-  <<: *default
-  database: auth_test
-
+ 
 production:
   <<: *default
   database: auth_production

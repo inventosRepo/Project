@@ -19,6 +19,7 @@
 		</p>
 
 		<%= button_to "Создать", new_welcome_path %>
+		<%= button_to "Disconect", welcome_disconnect_path %>
     <div style ="float:left">
 			<h2>Доступные игры</h2>
 			<% @games.each do |game| %>
@@ -34,7 +35,8 @@
 		<h2>Идет игра</h2>
 			<% @ingames.each do |game| %>
 				<ul>
-					<li><%= game.player1 %></li>
+					<li><%= game.player1 %> VS <%= game.player2 %></li>
+
 				</ul>
 			<% end %>
 		</div>

@@ -6,6 +6,8 @@
 		var port = '<%=APP_CONFIG[:ws_port]%>';
 		var player = '<%=@players.playersid %>';
 	</script>
+	<script src="scripts/fullscreen.js"></script>
+	<script src="scripts/direction.js"></script>
 	<%=@players.playersid %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
 		<div id="keys">
 			<div id="left" class="btn_dir"></div>
@@ -26,5 +28,3 @@
 	<% end %>
 	<% end %>
 </div>
-<script src="scripts/fullscreen.js"></script>
-<script src="scripts/direction.js"></script>

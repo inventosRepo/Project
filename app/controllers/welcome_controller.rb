@@ -1,11 +1,25 @@
 # WelcomeController
 class WelcomeController < ApplicationController
+  skip_before_filter :verify_authenticity_token, only: [:index]
   def index
+    @position_1 = params[:position_first_tank]
+    @position_2 = params[:position_second_tank]
+    # Запись в бд
+    if user_signed_in? && (!@position_1.nil? || !@position_2.nil?)
+      @user = User.where(email: current_user.email).take
+      if @user.playersid == '1'
+        @field = Field.where(player1: current_user.email).take
+        @field.position_1 = @position_1
+      else
+        @field = Field.where(player2: current_user.email).take
+        @field.position_2 = @position_2
+      end
+      @field.save
+    end
+
     @games = Field.where(count: '1')
     @ingames = Field.where(count: '2')
-    if user_signed_in?
-      @players = User.where(email: current_user.email).take
-    end
+    @players = User.where(email: current_user.email).take if user_signed_in?
   end
 
   def new
@@ -21,11 +35,10 @@ class WelcomeController < ApplicationController
   end
 
   def connecting
-    if !Field.exists?(player1: current_user.email)
+    unless Field.exists?(player1: current_user.email)
       @currentmail = params[:currentgame]
       @field = Field.where(player1: @currentmail).take
       Field.ConnectingField(@field, current_user.email)
-
       @user = User.where(email: current_user.email).take
       @user.playersid = 2
       @user.save
@@ -35,11 +48,15 @@ class WelcomeController < ApplicationController
 
   def disconnect
     @user = User.where(email: current_user.email).take
-    if @user.playersid == "1"
+    if @user.playersid == '1'
       @field = Field.where(player1: current_user.email)
+      @game = Field.where(player1: current_user.email).take
       @user.playersid = nil
-      @user2 = User.where(email: @field.player2).take
-      @user2.save
+      unless @game.player2.nil?
+        @user2 = User.where(email: @game.player2).take
+        @user2.playersid = nil
+        @user2.save
+      end
       @field.destroy_all
       @user.save
     else
@@ -53,5 +70,8 @@ class WelcomeController < ApplicationController
       end
     end
     redirect_to user_root_path
+  end
+
+  def save
   end
 end

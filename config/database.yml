@@ -9,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: <%= ENV["TANKS_DB_HOST"] %>
+  database: auth_development
 
 production:
   <<: *default

@@ -153,4 +153,5 @@ $(function() {
   //setInterval(NpcMovement, 700);
   //setInterval(NpcShot, 1500);
   //setInterval(movenpcbullets, 50);
+
 });

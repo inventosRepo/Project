@@ -1,7 +1,6 @@
 Rails.application.routes.draw do
   devise_for :users
   root 'welcome#index', as: 'user_root'
-
   post 'code/hi'
   get 'code/hi'
   post 'code/new'
@@ -9,9 +8,10 @@ Rails.application.routes.draw do
   post 'welcome/new'
   post 'welcome/connecting'
   post 'welcome/disconnect'
+  post 'welcome/save'
+  post 'welcome/index'
   resources :welcome do
     member do
-      post 'index'
       post 'new'
     end
   end

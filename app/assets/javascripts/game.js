@@ -125,9 +125,6 @@ $(function() {
   canvas.width  = x_count * cell_size;
   canvas.height = y_count * cell_size;
   context = canvas.getContext('2d');
-
-  select_level(1);
-
   img_brick = new Image();
   img_brick.src = 'images/brick.png';
   img_steel = new Image();

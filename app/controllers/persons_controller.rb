@@ -4,6 +4,6 @@ class PersonsController < ApplicationController
 
   def generate
     @user = User.where(email: current_user.email).take
-    User.generate_code(@user)
+    @user.generate_code
   end
 end

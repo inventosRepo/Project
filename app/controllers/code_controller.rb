@@ -8,7 +8,7 @@ class CodeController < ApplicationController
     else
       @user = User.where(code: params[:code]).take
       sign_in(:user, @user)
-      User.remove_code(@user)
+      @user.remove_code
     end
     redirect_to user_root_path
   end

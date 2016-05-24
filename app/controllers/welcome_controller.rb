@@ -2,10 +2,12 @@
 class WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:index]
   def index
+
     if user_signed_in?
       level = User.where(email: current_user.email).take
-      @map = Level.SelectLevel(level.user_level)
+      @map = Level.select_level(level.user_level)
     end
+    
     @position_1 = params[:position_first_tank]
     @position_2 = params[:position_second_tank]
     # Запись в бд

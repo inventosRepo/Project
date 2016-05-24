@@ -9,6 +9,15 @@
     function connect(player) {
       try {
         socket[player] = new WebSocket(host);
+
+        socket[player].onopen = function () {
+          var msg = {
+            player_id: player,
+            button_id: 0,
+            connect_id: 'connected'
+          };
+          socket[player].send(JSON.stringify(msg));
+        }
       } catch(exception) {
         addMessage("Error: " + exception);
       }

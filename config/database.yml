@@ -9,7 +9,7 @@ default: &default
 
 development:
   <<: *default
-  database: auth_development
+  database: auth_database
 
 production:
   <<: *default

@@ -1,33 +1,21 @@
-// player_logic_variables
-var player, button;
-
-// player_1_variables
-var tank_1; tank_2, tank_NPC;
-var player_1_live = true;
-var bullets_1 = [];
-var bullet_1_cell_x, bullet_1_cell_y, tank_1_cell_x, tank_1_cell_y;
-
-// player_2_variables
-var tank_2;
-var player_2_live = true;
-var bullets_2 = [];
-var bullet_2_cell_x, bullet_2_cell_y, tank_2_cell_x, tank_2_cell_y;
-
-// NPC_variables
-var tank_NPC;
-var npc_bullets = [];
-var npc_bullet_cell_x, npc_bullet_cell_y, npc_tank_cell_x, npc_tank_cell_y;
-var random_move;
+// player_variables
+var player = 0;
+var tank = [];
+var player_live = [];
+var bullets = [];
+for (var i = 0; i < 10; i++){
+  bullets[i] = [];
+}
 
 // scene_variables
-var canvas, context, level_map;
-var img_brick, img_steel, img_water, img_forest, img_tank;
+var canvas, context;
+//var img_brick, img_steel, img_water, img_forest, img_tank;
 var cell_size = 24;
 var x_count = 26;
 var y_count = 26;
 
 // connection_variables
-var host, socket, msg;
+var host, socket;
 
 // Objects
 function Tank(x, y, w, h, image) {
@@ -50,37 +38,24 @@ function clear() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
+//players draw function
 function draw_players() {
-  if (player_1_live == false) {
-    delete tank_1.x;
-    delete tank_1.y;
-    delete tank_1.w;
-    delete tank_1.h;
-    delete tank_1.i;
-    delete tank_1.image;
+  if (player_live[player] == false) {
+    tank[player] = null;
   }
   else {
-    context.drawImage(tank_1.image, tank_1.i*tank_1.w, 0, tank_1.w, tank_1.h, tank_1.x, tank_1.y, tank_1.w, tank_1.h);
-    for (var i = 0; i < bullets_1.length; i++) {
-      context.drawImage(img_bullet, bullets_1[i].bull_x,  bullets_1[i].bull_y);
-    }
-  };
-  if (player_2_live == false) {
-    delete tank_2.x;
-    delete tank_2.y;
-    delete tank_2.w;
-    delete tank_2.h;
-    delete tank_2.i;
-    delete tank_2.image;
-  }
-  else {
-    context.drawImage(tank_2.image, tank_2.i*tank_2.w, 0, tank_2.w, tank_2.h, tank_2.x, tank_2.y, tank_2.w, tank_2.h);
-    for (var i = 0; i < bullets_2.length; i++) {
-      context.drawImage(img_bullet, bullets_2[i].bull_x,  bullets_2[i].bull_y);
+    for (var j = 1; j < tank.length; j++) {
+      context.drawImage(tank[j].image, tank[j].i*tank[j].w, 0,
+                        tank[j].w, tank[j].h, tank[j].x, tank[j].y,
+                        tank[j].w, tank[j].h);
+      for (var i = 0; i < bullets[j].length; i++) {
+        context.drawImage(img_bullet, bullets[j][i].bull_x,  bullets[j][i].bull_y);
+      }
     }
   };
 }
 
+//full scene draw function
 function draw_scene() {
   clear();
 
@@ -108,23 +83,22 @@ function draw_scene() {
       }
     }
   }
-
   context.restore();
 
-
-  //context.drawImage(tank_NPC.image, tank_NPC.i*tank_NPC.w, 0, tank_NPC.w, tank_NPC.h, tank_NPC.x, tank_NPC.y, tank_NPC.w, tank_NPC.h);
-  /*for (var i = 0; i < npc_bullets.length; i++) {
-    context.drawImage(img_bullet, npc_bullets[i].bull_x,  npc_bullets[i].bull_y);
-  }*/
+  move_bullets();
+  draw_players();
 }
 
 $(function() {
+  //connection init
   host = "ws://"+ip+":"+port;
   socket = new WebSocket (host);
+  //canvas init
   canvas = document.getElementById('map');
   canvas.width  = x_count * cell_size;
   canvas.height = y_count * cell_size;
   context = canvas.getContext('2d');
+  //loading images
   img_brick = new Image();
   img_brick.src = 'images/brick.png';
   img_steel = new Image();
@@ -135,20 +109,11 @@ $(function() {
   img_forest.src = 'images/forest.png';
   img_bullet = new Image();
   img_bullet.src = 'images/bullet.png';
-
   img_tank = new Image();
   img_tank.src = 'images/tank.png';
-  tank_1 = new Tank(cell_size*12, cell_size*6, 48, 48, img_tank);
-  tank_2 = new Tank(cell_size*12, cell_size*0, 48, 48, img_tank);
-  //tank_NPC = new Tank(cell_size*12, cell_size*0, 48, 48, img_tank)
 
-  connect();
+  connect(); //connect to WebSocket
 
-  setInterval(draw_scene, 50);
-  setInterval(draw_players, 50);
-  setInterval(move_bullets, 50);
-  //setInterval(NpcMovement, 700);
-  //setInterval(NpcShot, 1500);
-  //setInterval(movenpcbullets, 50);
+  setInterval(draw_scene, 50); //redraw scene every 50 ms
 
 });

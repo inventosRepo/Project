@@ -2,7 +2,6 @@
 	<% if user_signed_in?%>
 	<script>
 		var name = '<%=current_user.email %>';
-		var ip = '<%=APP_CONFIG[:ws_ip]%>';
 		var port = '<%=APP_CONFIG[:ws_port]%>';
 		var player = '<%=@players.playersid %>';
 	</script>

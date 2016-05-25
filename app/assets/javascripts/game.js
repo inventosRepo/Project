@@ -91,7 +91,7 @@ function draw_scene() {
 
 $(function() {
   //connection init
-  host = "ws://"+ip+":"+port;
+  host = "ws://"+window.location.hostname.toString()+":"+port;
   socket = new WebSocket (host);
   //canvas init
   canvas = document.getElementById('map');

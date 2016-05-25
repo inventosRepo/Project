@@ -1,5 +1,5 @@
   window.onload = function() {
-    var host = "ws://"+ip+":"+port;
+    var host = "ws://"+window.location.hostname.toString()+":"+port;
     var socket = [];
     var btn_id;
     var bonus = 1;

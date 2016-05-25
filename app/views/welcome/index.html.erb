@@ -2,18 +2,15 @@
 	var port = '<%=APP_CONFIG[:ws_port]%>';
 	var level_map = JSON.parse('<%=@level_map %>');
 </script>
-<h1 aling="center">Battle city</h1>
+<h1 align="center">Battle city</h1>
 <div id="user_nav">
 	<% if user_signed_in?%>
-		<p>
+		<div><canvas align="left" id="map" width="600" height="600"></canvas></div>
+		<p align>
 			Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
 		</p>
-
-		<%= button_to "Создать", new_welcome_path %>
+		<%= button_to "Создать игру", new_welcome_path %>
 		<%= button_to "Удалить(отключиться)", welcome_disconnect_path %>
-
-		<div><canvas align="left" id="map" width="600" height="600"></canvas></div>
-
     <div style ="float:right">
 			<h2>Доступные игры</h2>
 			<% @games.each do |game| %>

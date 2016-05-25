@@ -85,10 +85,9 @@ function connect() {
           }
         }
       }
-
       if (button == 5) {
         bullets[player].push(new Bullet(tank[player].i, tank[player].x+12, tank[player].y+12, 1));
-      }
+      }      
     }
   }
 }

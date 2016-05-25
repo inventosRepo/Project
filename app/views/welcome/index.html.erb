@@ -9,13 +9,13 @@
 		<p>
 			Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
 		</p>
-		<p>
-			<%= link_to "Ваш профиль", profile_persons_path %>
-		</p>
 
 		<%= button_to "Создать", new_welcome_path %>
-		<%= button_to "Disconect", welcome_disconnect_path %>
-    <div style ="float:left">
+		<%= button_to "Удалить(отключиться)", welcome_disconnect_path %>
+
+		<div><canvas align="left" id="map" width="600" height="600"></canvas></div>
+
+    <div style ="float:right">
 			<h2>Доступные игры</h2>
 			<% @games.each do |game| %>
 				<ul>
@@ -31,14 +31,11 @@
 			<% @ingames.each do |game| %>
 				<ul>
 					<li><%= game.player1 %> VS <%= game.player2 %></li>
-
 				</ul>
 			<% end %>
 		</div>
 
 		<div style="clear:both"></div>
-
-		<div><canvas align="center" id="map" width="600" height="600"></canvas></div>
 
 		<% else %>
 			<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или

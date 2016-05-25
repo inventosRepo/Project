@@ -9,7 +9,7 @@ for (var i = 0; i < 10; i++){
 
 // scene_variables
 var canvas, context;
-//var img_brick, img_steel, img_water, img_forest, img_tank;
+var img_brick, img_steel, img_water, img_forest, img_tank;
 var cell_size = 24;
 var x_count = 26;
 var y_count = 26;

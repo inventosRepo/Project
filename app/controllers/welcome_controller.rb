@@ -80,4 +80,10 @@ class WelcomeController < ApplicationController
 
   def save
   end
+
+  def generate_code
+    @user = User.where(email: current_user.email).take
+    @user.generate_code
+    redirect_to user_root_path
+  end
 end

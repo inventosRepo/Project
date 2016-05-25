@@ -11,6 +11,8 @@
 		</p>
 		<%= button_to "Создать игру", new_welcome_path %>
 		<%= button_to "Удалить(отключиться)", welcome_disconnect_path %>
+		<p>Ваш код: <%=current_user.code %></p>
+		<%= button_to "Сгенерировать код", welcome_generate_code_path %>
     <div style ="float:right">
 			<h2>Доступные игры</h2>
 			<% @games.each do |game| %>

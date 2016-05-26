@@ -1,6 +1,6 @@
 <script>
 	var port = '<%=APP_CONFIG[:ws_port]%>';
-	var level_map = JSON.parse('<%=@level_map %>');
+	var level_map = JSON.parse('<%=@level_map%>');
 </script>
 <h1 align="center">Battle city</h1>
 <div id="user_nav">
@@ -13,6 +13,7 @@
 		<%= button_to "Удалить(отключиться)", welcome_disconnect_path %>
 		<p>Ваш код: <%=current_user.code %></p>
 		<%= button_to "Сгенерировать код", welcome_generate_code_path %>
+		<button onclick = 'post_level_map()'>Сохранить игру</button>
     <div style ="float:right">
 			<h2>Доступные игры</h2>
 			<% @games.each do |game| %>
@@ -40,3 +41,4 @@
 			<%= link_to "выполните вход", new_user_session_path %></p>
 		<% end %>
 	</div>
+

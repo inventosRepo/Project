@@ -17,7 +17,6 @@ function connect() {
         var cur_cel_x = (2 * tank[player].x) / 48;
         var cur_cel_y = (2 * tank[player].y) / 48;
         position_1 = [tank[player].x, tank[player].y]
-        post_position_1();
         var test_1 = level_map[cur_cel_y][cur_cel_x-1];
         var test_2 = level_map[cur_cel_y+1][cur_cel_x-1];
         if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
@@ -34,7 +33,6 @@ function connect() {
         var cur_cel_x = (2 * tank[player].x) / 48;
         var cur_cel_y = (2 * tank[player].y) / 48;
         position_1 = [tank[player].x, tank[player].y]
-        post_position_1();
         if (cur_cel_y) {
           var test_1 = level_map[cur_cel_y-1][cur_cel_x];
           var test_2 = level_map[cur_cel_y-1][cur_cel_x+1];
@@ -54,7 +52,6 @@ function connect() {
         var cur_cel_x = (2 * tank[player].x) / 48;
         var cur_cel_y = (2 * tank[player].y) / 48;
         position_1 = [tank[player].x, tank[player].y]
-        post_position_1();
         if (cur_cel_y < cell_size * y_count-2) {
           var test_1 = level_map[cur_cel_y+2][cur_cel_x];
           var test_2 = level_map[cur_cel_y+2][cur_cel_x+1];
@@ -73,8 +70,6 @@ function connect() {
 
         var cur_cel_x = (2 * tank[player].x) / 48;
         var cur_cel_y = (2 * tank[player].y) / 48;
-        position_1 = [tank[player].x, tank[player].y]
-        post_position_1();
         var test_1 = level_map[cur_cel_y][cur_cel_x+2];
         var test_2 = level_map[cur_cel_y+1][cur_cel_x+2];
 
@@ -87,25 +82,16 @@ function connect() {
       }
       if (button == 5) {
         bullets[player].push(new Bullet(tank[player].i, tank[player].x+12, tank[player].y+12, 1));
-      }      
+      }
     }
   }
 }
-
-function post_position_1(){
+function post_level_map(){
   $.ajax({
     url: "welcome/index",
     type: "post",
     dataType: "json",
-    data: { position_first_tank: position_1 }
+    data: { lvlmap: JSON.stringify(level_map) }
   });
 }
 
-function post_position_2(){
-  $.ajax({
-    url: "welcome/index",
-    type: "post",
-    dataType: "json",
-    data: { position_second_tank: position_2 }
-  });
-}

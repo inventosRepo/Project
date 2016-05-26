@@ -1,6 +1,7 @@
 class AddPositionToFields < ActiveRecord::Migration
-  def change
-    add_column :fields, :position_1, :string
-    add_column :fields, :position_2, :string
+  def up
+    add_column :fields, :map, :text
+    add_column :fields, :save_game, :integer, default: 0
   end
 end
+

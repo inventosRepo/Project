@@ -1,26 +1,32 @@
 # WelcomeController
 class WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:index]
+
   def index
-    if user_signed_in?
-      level = User.where(email: current_user.email).take
-      map = Level.find(level.user_level)
-      @level_map = map.data
+    @current_game = Field.where(player1: current_user.email).take if user_signed_in?
+    unless @current_game.nil?
+      if user_signed_in? && @current_game.save_game == 0 && !@current_game.nil?
+        level = User.where(email: current_user.email).take
+        map = Level.find(level.user_level)
+        @level_map = map.data
+      else
+        @level_map = @current_game.map
+      end
     end
 
-    @position_1 = params[:position_first_tank]
-    @position_2 = params[:position_second_tank]
+    @save_level = params[:lvlmap]
     # Запись в бд
-    if user_signed_in? && (!@position_1.nil? || !@position_2.nil?)
+    if user_signed_in? && !@save_level.nil?
       @user = User.where(email: current_user.email).take
-      if @user.playersid == '1'
-        @field = Field.where(player1: current_user.email).take
-        @field.position_1 = @position_1
-      else
-        @field = Field.where(player2: current_user.email).take
-        @field.position_2 = @position_2
-      end
+      @field = if @user.playersid == '1'
+                 Field.where(player1: current_user.email).take
+               else
+                 Field.where(player2: current_user.email).take
+               end
+      @field.map = @save_level
       @field.save
+      @current_game.save_game = 1
+      @current_game.save
     end
 
     @games = Field.where(count: '1')
@@ -87,3 +93,4 @@ class WelcomeController < ApplicationController
     redirect_to user_root_path
   end
 end
+

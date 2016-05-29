@@ -18,12 +18,12 @@ var y_count = 26;
 var host, socket;
 
 // Objects
-function Tank(x, y, w, h, image) {
+function Tank(x, y, w, h, i=2, image) {
   this.x = x;
   this.y = y;
   this.w = w;
   this.h = h;
-  this.i = 2;
+  this.i = i;
   this.image = image;
 }
 
@@ -53,7 +53,6 @@ function draw_players() {
     }
   };
 }
-
 //full scene draw function
 function draw_scene() {
   clear();

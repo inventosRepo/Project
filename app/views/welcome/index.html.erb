@@ -1,8 +1,7 @@
 <script>
 	var port = '<%=APP_CONFIG[:ws_port]%>';
 	var level_map = JSON.parse('<%=@level_map%>');
-	var tanks = JQuery.parseJSON('<%=@arr_tanks%>')
-	console.log(tanks)
+  var tanks = JSON.parse(gon.arr_tanks);
 </script>
 <h1 align="center">Battle city</h1>
 <div id="user_nav">

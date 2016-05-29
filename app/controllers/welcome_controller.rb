@@ -15,9 +15,12 @@ class WelcomeController < ApplicationController
           level = User.where(email: current_user.email).take
           map = Level.find(level.user_level)
           @level_map = map.data
+          @arr_tanks = @current_game.save_arrs_tanks
+          gon.arr_tanks = @arr_tanks
         else
           @level_map = @current_game.map
           @arr_tanks = @current_game.save_arrs_tanks
+          gon.arr_tanks = @arr_tanks
         end
 
         @save_level = params[:lvlmap]

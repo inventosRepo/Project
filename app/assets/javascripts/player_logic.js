@@ -91,7 +91,9 @@ function post_level_map(){
     url: "welcome/index",
     type: "post",
     dataType: "json",
-    data: { lvlmap: JSON.stringify(level_map) }
+    data: {
+      lvlmap: JSON.stringify(level_map),
+      arrs_tanks: JSON.stringify(tank),
+    }
   });
 }
-

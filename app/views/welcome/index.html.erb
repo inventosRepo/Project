@@ -1,6 +1,7 @@
 <script>
 	var port = '<%=APP_CONFIG[:ws_port]%>';
 	var level_map = JSON.parse('<%=@level_map%>');
+	var tanks = JSON.parse('<%=@positions_tanks%>')
 </script>
 <h1 align="center">Battle city</h1>
 <div id="user_nav">
@@ -41,4 +42,3 @@
 			<%= link_to "выполните вход", new_user_session_path %></p>
 		<% end %>
 	</div>
-

@@ -14,12 +14,13 @@
 ActiveRecord::Schema.define(version: 20160524042454) do
 
   create_table "fields", force: :cascade do |t|
-    t.string "player1",    limit: 255
-    t.string "player2",    limit: 255
-    t.string "count",      limit: 255
-    t.string "playersid",  limit: 255
-    t.string "position_1", limit: 255
-    t.string "position_2", limit: 255
+    t.string  "player1",         limit: 255
+    t.string  "player2",         limit: 255
+    t.string  "count",           limit: 255
+    t.string  "playersid",       limit: 255
+    t.text    "map",             limit: 65535
+    t.integer "save_game",       limit: 4,     default: 0
+    t.text    "save_arrs_tanks", limit: 65535
   end
 
   create_table "levels", force: :cascade do |t|

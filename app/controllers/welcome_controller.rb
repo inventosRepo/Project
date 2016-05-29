@@ -3,30 +3,34 @@ class WelcomeController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:index]
 
   def index
-    @current_game = Field.where(player1: current_user.email).take if user_signed_in?
-    unless @current_game.nil?
-      if user_signed_in? && @current_game.save_game == 0 && !@current_game.nil?
-        level = User.where(email: current_user.email).take
-        map = Level.find(level.user_level)
-        @level_map = map.data
-      else
-        @level_map = @current_game.map
-      end
-    end
-
-    @save_level = params[:lvlmap]
-    # Запись в бд
-    if user_signed_in? && !@save_level.nil?
+    if user_signed_in?
       @user = User.where(email: current_user.email).take
-      @field = if @user.playersid == '1'
-                 Field.where(player1: current_user.email).take
-               else
-                 Field.where(player2: current_user.email).take
-               end
-      @field.map = @save_level
-      @field.save
-      @current_game.save_game = 1
-      @current_game.save
+      @current_game = if @user.playersid == '1'
+                        Field.where(player1: current_user.email).take
+                      else
+                        Field.where(player2: current_user.email).take
+                      end
+      unless @current_game.nil?
+        if user_signed_in? && @current_game.save_game == 0 && !@current_game.nil?
+          level = User.where(email: current_user.email).take
+          map = Level.find(level.user_level)
+          @level_map = map.data
+          @positions_tanks
+        else
+          @level_map = @current_game.map
+          @arr_tanks = @current_game.save_arrs_tanks
+        end
+
+        @save_level = params[:lvlmap]
+        @save_arrs_tanks = params[:arrs_tanks]
+        # Запись в бд
+        unless @save_level.nil?
+          @current_game.map = @save_level
+          @current_game.save_arrs_tanks = @save_arrs_tanks
+          @current_game.save_game = 1
+          @current_game.save
+        end
+      end
     end
 
     @games = Field.where(count: '1')
@@ -93,4 +97,3 @@ class WelcomeController < ApplicationController
     redirect_to user_root_path
   end
 end
-

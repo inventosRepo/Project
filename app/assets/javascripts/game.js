@@ -37,7 +37,6 @@ function Bullet(direct, bull_x, bull_y, bulltype) {
 function clear() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
-
 //players draw function
 function draw_players() {
   if (player_live[player] == false) {

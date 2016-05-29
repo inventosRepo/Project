@@ -3,8 +3,7 @@ class CreateFields < ActiveRecord::Migration
     create_table :fields do |t|
       t.string   :player1
       t.string   :player2
-      t.string   :count
-      t.string   :playersid
+      t.string   :online_players
     end
   end
 end

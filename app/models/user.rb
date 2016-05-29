@@ -5,13 +5,13 @@ class User < ActiveRecord::Base
          :recoverable, :rememberable, :trackable, :validatable, authentication_keys: [:email]
   def remove_code
     self.code = nil
-    self.save
+    save
   end
 
   def generate_code
-    code = ['a'..'z','A'..'Z','0'..'9'].map{ |range| range.to_a }.flatten
-    self.code = (0...6).map{ code[ rand(code.size) ] }.join
+    code = ['a'..'z', 'A'..'Z', '0'..'9'].map(&:to_a).flatten
+    self.code = (0...6).map { code[rand(code.size)] }.join
     self.creatingtime = Time.now
-    self.save
+    save
   end
 end

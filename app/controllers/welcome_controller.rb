@@ -15,7 +15,6 @@ class WelcomeController < ApplicationController
           level = User.where(email: current_user.email).take
           map = Level.find(level.user_level)
           @level_map = map.data
-          @positions_tanks
         else
           @level_map = @current_game.map
           @arr_tanks = @current_game.save_arrs_tanks
@@ -33,8 +32,8 @@ class WelcomeController < ApplicationController
       end
     end
 
-    @games = Field.where(count: '1')
-    @ingames = Field.where(count: '2')
+    @games = Field.where(online_players: '1')
+    @ingames = Field.where(online_players: '2')
     @players = User.where(email: current_user.email).take if user_signed_in?
   end
 
@@ -80,7 +79,7 @@ class WelcomeController < ApplicationController
         @field = Field.where(player2: current_user.email).take
         @user.playersid = nil
         @field.player2 = nil
-        @field.count = 1
+        @field.online_players = 1
         @user.save
         @field.save
       end

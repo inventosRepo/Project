@@ -18,12 +18,17 @@ var y_count = 26;
 var host, socket;
 
 // Objects
-function Tank(x, y, w, h, i=2, image) {
+function Tank(x, y, w, h, image, i) {
   this.x = x;
   this.y = y;
   this.w = w;
   this.h = h;
-  this.i = i;
+
+  if(i == undefined){
+    this.i = 2;
+  }
+  else this.i = i;
+
   this.image = image;
 }
 

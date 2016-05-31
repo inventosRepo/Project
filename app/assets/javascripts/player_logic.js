@@ -8,8 +8,12 @@ function connect() {
 
     if (connected == 'connected') {
       player_live[player] = true;
-      tank[player] = new Tank(tanks[player-1].x, tanks[player-1].y, 48, 48, tanks[player-1].i, img_tank);
-
+      if(tanks != null){
+        tank[player] = new Tank(tanks[player-1].x, tanks[player-1].y, 48, 48, img_tank, tanks[player-1].i);
+      }
+      else{
+        tank[player] = new Tank(cell_size*12, cell_size*0, 48, 48, img_tank);
+      }
     }
     if (player_live[player] == true) {
       if (button == 1) {

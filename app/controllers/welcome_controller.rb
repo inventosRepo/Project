@@ -16,16 +16,15 @@ class WelcomeController < ApplicationController
           map = Level.find(level.user_level)
           @level_map = map.data
           @arr_tanks = @current_game.save_arrs_tanks
-          gon.arr_tanks = @arr_tanks
         else
           @level_map = @current_game.map
-          @arr_tanks = @current_game.save_arrs_tanks
-          gon.arr_tanks = @arr_tanks
+          @arr_tanks = @current_game.save_arrs_tank
         end
+        gon.arr_tanks = @arr_tanks
 
         @save_level = params[:lvlmap]
         @save_arrs_tanks = params[:arrs_tanks]
-        # Запись в бд
+
         unless @save_level.nil?
           @current_game.map = @save_level
           @current_game.save_arrs_tanks = @save_arrs_tanks
@@ -90,12 +89,11 @@ class WelcomeController < ApplicationController
     redirect_to user_root_path
   end
 
-  def save
-  end
-
   def generate_code
     @user = User.where(email: current_user.email).take
     @user.generate_code
-    redirect_to user_root_path
+    respond_to do |format|
+      format.js
+    end
   end
 end

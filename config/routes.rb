@@ -11,6 +11,7 @@ Rails.application.routes.draw do
   post 'welcome/save'
   post 'welcome/index'
   post 'welcome/generate_code'
+  get 'welcome/generate_code'
   resources :welcome do
     member do
       post 'new'

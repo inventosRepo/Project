@@ -3,21 +3,23 @@
 	var level_map = JSON.parse('<%=@level_map%>');
   var tanks = JSON.parse(gon.arr_tanks);
 </script>
+
 <h1 align="center">Battle city</h1>
 <div id="user_nav">
+
 	<% if user_signed_in?%>
 		<div><canvas align="left" id="map" width="600" height="600"></canvas></div>
 		<p align>
 			Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
 		</p>
 		<%= button_to "Создать игру", new_welcome_path %>
-		<%= button_to "Удалить(отключиться)", welcome_disconnect_path %>
-		<p>Ваш код: <%=current_user.code %></p>
-		<%= button_to "Сгенерировать код", welcome_generate_code_path %>
+		<%= button_to "Удалить(отключиться)", welcome_disconnect_path%>
+		<p class ="code">Ваш код: <%=@user.code%></p>
+		<%= button_to "Сгенерировать код", welcome_generate_code_path, remote: true, class: 'btn_gen_code' %>
 		<button onclick = 'post_level_map()'>Сохранить игру</button>
     <div style ="float:right">
 			<h2>Доступные игры</h2>
-			<% @games.each do |game| %>
+			<%@games.each do |game|%>
 				<ul>
 					<li>
 						<%= game.player1 %>
@@ -27,8 +29,9 @@
 			<% end %>
 		</div>
 		<div style ="margin-left: 20%">
+
 		<h2>Идет игра</h2>
-			<% @ingames.each do |game| %>
+			<%@ingames.each do |game|%>
 				<ul>
 					<li><%= game.player1 %> VS <%= game.player2 %></li>
 				</ul>

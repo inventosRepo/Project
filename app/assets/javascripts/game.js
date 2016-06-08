@@ -3,6 +3,8 @@ var player = 0;
 var tank = [];
 var tank_cell_x = [];
 var tank_cell_y = [];
+var bullet_cell_x = [];
+var bullet_cell_y = [];
 var player_live = [];
 var bullets = [];
 for (var i = 0; i < 10; i++){
@@ -49,13 +51,11 @@ function Bullet(direct, bull_x, bull_y, bulltype) {
 function clear() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
+
 //players draw function
 function draw_players() {
-  if (player_live[player] == false) {
-    tank[player] = null;
-  }
-  else {
     for (var j = 1; j < tank.length; j++) {
+      if ((player_live[j] == true) && (tank[j] != null)) {
       context.drawImage(tank[j].image, tank[j].i*tank[j].w, 0,
                         tank[j].w, tank[j].h, tank[j].x, tank[j].y,
                         tank[j].w, tank[j].h);
@@ -63,8 +63,9 @@ function draw_players() {
         context.drawImage(img_bullet, bullets[j][i].bull_x,  bullets[j][i].bull_y);
       }
     }
-  };
+  }
 }
+
 //full scene draw function
 function draw_scene() {
   clear();

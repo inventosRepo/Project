@@ -1,6 +1,8 @@
 // player_variables
 var player = 0;
 var tank = [];
+var tank_cell_x = [];
+var tank_cell_y = [];
 var player_live = [];
 var bullets = [];
 for (var i = 0; i < 10; i++){
@@ -13,24 +15,29 @@ var img_brick, img_steel, img_water, img_forest, img_tank;
 var cell_size = 24;
 var x_count = 26;
 var y_count = 26;
+var tank_width = 48;
+var tank_heigth = 48;
 
 // connection_variables
 var host, socket;
 
 // Objects
-function Tank(x, y, w, h, image, i) {
-  this.x = x;
-  this.y = y;
-  this.w = w;
-  this.h = h;
-
-  if(i == undefined){
-    this.i = 2;
-  }
-  else this.i = i;
-
+function Tank_object (image) {
+  this.w = tank_width;
+  this.h = tank_heigth;
+  this.i = 1;
   this.image = image;
 }
+
+function Tank (x, y) {
+  this.x = x;
+  this.y = y;
+  //var self = this;
+  //var setX = function(x) { self.x=x; }
+  //var setY = function(y) { self.y=y; }
+}
+
+Tank.prototype = Tank_object;
 
 function Bullet(direct, bull_x, bull_y, bulltype) {
   this.direct = direct;
@@ -115,8 +122,10 @@ $(function() {
   img_tank = new Image();
   img_tank.src = 'images/tank.png';
 
+  var tank = new Tank_object(img_tank);
+  Tank.prototype = tank;
+
   connect(); //connect to WebSocket
 
   setInterval(draw_scene, 50); //redraw scene every 50 ms
-
 });

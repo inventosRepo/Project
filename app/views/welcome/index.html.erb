@@ -1,47 +1,22 @@
-<script>
-	var port = '<%=APP_CONFIG[:ws_port]%>';
-	var level_map = JSON.parse('<%=@level_map%>');
-  var tanks = JSON.parse(gon.arr_tanks);
-</script>
-
-<h1 align="center">Battle city</h1>
 <div id="user_nav">
 
 	<% if user_signed_in?%>
-		<div><canvas align="left" id="map" width="600" height="600"></canvas></div>
-		<p align>
+
+		<p>
 			Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
-		</p>
-		<%= button_to "Создать игру", new_welcome_path %>
-		<%= button_to "Удалить(отключиться)", welcome_disconnect_path%>
-		<p class ="code">Ваш код: <%=@user.code%></p>
-		<%= button_to "Сгенерировать код", welcome_generate_code_path, remote: true, class: 'btn_gen_code' %>
-		<button onclick = 'post_level_map()'>Сохранить игру</button>
-    <div style ="float:right">
-			<h2>Доступные игры</h2>
-			<%@games.each do |game|%>
-				<ul>
-					<li>
-						<%= game.player1 %>
-						<%= button_to "присоединится", welcome_connecting_path(:currentgame => game.player1) %>
-					</li>
-				</ul>
-			<% end %>
-		</div>
-		<div style ="margin-left: 20%">
+    </p>
 
-		<h2>Идет игра</h2>
-			<%@ingames.each do |game|%>
-				<ul>
-					<li><%= game.player1 %> VS <%= game.player2 %></li>
-				</ul>
-			<% end %>
-		</div>
+    <p>
+      <%= link_to 'multiplayer', multiplayer_path %>
+    </p>
 
-		<div style="clear:both"></div>
+		<p>
+      <%= link_to 'singleplayer', singleplayer_path %>
+    </p>
 
-		<% else %>
-			<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
-			<%= link_to "выполните вход", new_user_session_path %></p>
-		<% end %>
-	</div>
+  <% else %>
+		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
+		<%= link_to "выполните вход", new_user_session_path %></p>
+	<% end %>
+
+</div>

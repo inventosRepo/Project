@@ -1,15 +1,21 @@
 // player_variables
-var player = 0;
-var tank = [];
-var tank_cell_x = [];
-var tank_cell_y = [];
-var bullet_cell_x = [];
-var bullet_cell_y = [];
-var player_live = [];
+var tank;
+var player_live = false;
 var bullets = [];
-for (var i = 0; i < 10; i++){
-  bullets[i] = [];
+
+// npc_variables
+var npc_count = 2;
+var npc_tank = [];
+var npc_live = [];
+var npc_tank_cell_x = [];
+var npc_tank_cell_y = [];
+var npc_bullet_cell_x = [];
+var npc_bullet_cell_y = [];
+var npc_bullets = [];
+for (var i = 0; i < npc_count; i++){
+  npc_bullets[i] = [];
 }
+var offset = 0;
 
 // scene_variables
 var canvas, context;
@@ -21,7 +27,8 @@ var tank_width = 48;
 var tank_heigth = 48;
 
 // connection_variables
-var host, socket;
+var host;
+var socket = [];
 
 // Objects
 function Tank_object (image) {
@@ -34,12 +41,7 @@ function Tank_object (image) {
 function Tank (x, y) {
   this.x = x;
   this.y = y;
-  //var self = this;
-  //var setX = function(x) { self.x=x; }
-  //var setY = function(y) { self.y=y; }
 }
-
-Tank.prototype = Tank_object;
 
 function Bullet(direct, bull_x, bull_y, bulltype) {
   this.direct = direct;
@@ -52,17 +54,29 @@ function clear() {
   context.clearRect(0, 0, canvas.width, canvas.height);
 }
 
-//players draw function
-function draw_players() {
-    for (var j = 1; j < tank.length; j++) {
-      if ((player_live[j] == true) && (tank[j] != null)) {
-      context.drawImage(tank[j].image, tank[j].i*tank[j].w, 0,
-                        tank[j].w, tank[j].h, tank[j].x, tank[j].y,
-                        tank[j].w, tank[j].h);
-      for (var i = 0; i < bullets[j].length; i++) {
-        context.drawImage(img_bullet, bullets[j][i].bull_x,  bullets[j][i].bull_y);
+//npc_draw_function
+function draw_npc() {
+    for (var j = 0; j < npc_tank.length; j++) {
+      if ((npc_live[j] == true) && (npc_tank[j] != null)) {
+      context.drawImage(npc_tank[j].image, npc_tank[j].i*npc_tank[j].w, 0,
+                        npc_tank[j].w, npc_tank[j].h, npc_tank[j].x, npc_tank[j].y,
+                        npc_tank[j].w, npc_tank[j].h);
+      for (var i = 0; i < npc_bullets[j].length; i++) {
+        context.drawImage(img_bullet, npc_bullets[j][i].bull_x,  npc_bullets[j][i].bull_y);
       }
     }
+  }
+}
+
+//player_draw_fucntion
+function draw_player() {
+  if (player_live == true) {
+    context.drawImage(tank.image, tank.i*tank.w, 0,
+                      tank.w, tank.h, tank.x, tank.y,
+                      tank.w, tank.h);
+  }
+  for (var i = 0; i < bullets.length; i++) {
+    context.drawImage(img_bullet, bullets[i].bull_x,  bullets[i].bull_y);
   }
 }
 
@@ -97,13 +111,15 @@ function draw_scene() {
   context.restore();
 
   move_bullets();
-  draw_players();
+  move_npc_bullets();
+  draw_player();
+  draw_npc();
 }
 
 $(function() {
   //connection init
   host = "ws://"+window.location.hostname.toString()+":"+port;
-  socket = new WebSocket (host);
+  socket[current_id] = new WebSocket (host);
   //canvas init
   canvas = document.getElementById('map');
   canvas.width  = x_count * cell_size;
@@ -111,22 +127,30 @@ $(function() {
   context = canvas.getContext('2d');
   //loading images
   img_brick = new Image();
-  img_brick.src = 'images/brick.png';
+  img_brick.src = '<%= asset_path("brick.png") %>';
   img_steel = new Image();
-  img_steel.src = 'images/steel.png';
+  img_steel.src = '<%= asset_path("steel.png") %>';
   img_water = new Image();
-  img_water.src = 'images/water.png';
+  img_water.src = '<%= asset_path("water.png") %>';
   img_forest = new Image();
-  img_forest.src = 'images/forest.png';
+  img_forest.src = '<%= asset_path("forest.png") %>';
   img_bullet = new Image();
-  img_bullet.src = 'images/bullet.png';
+  img_bullet.src = '<%= asset_path("bullet.png") %>';
   img_tank = new Image();
-  img_tank.src = 'images/tank.png';
+  img_tank.src = '<%= asset_path("tank.png") %>';
 
   var tank = new Tank_object(img_tank);
   Tank.prototype = tank;
 
+  //npc_spawn
+  for (var i = 0; i < npc_count; i++) {
+    npc_live[i] = true;
+    npc_tank[i] = new Tank (offset, 0);
+    offset+=cell_size * 2;
+  }
   connect(); //connect to WebSocket
 
   setInterval(draw_scene, 50); //redraw scene every 50 ms
+  setInterval(npc_movement, 1000);
+  setInterval(npc_shot, 1500);
 });

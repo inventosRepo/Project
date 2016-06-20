@@ -1,19 +1,15 @@
 function connect() {
-  socket.onmessage = function (event) {
+  socket[current_id].onmessage = function (event) {
     var msg = JSON.parse(event.data);
     var button = msg.button_id;
     var connected = msg.connect_id;
-
     player = msg.player_id;
 
     if (connected == 'connected') {
       player_live[player] = true;
-      if(tanks != null) {
-        tank[player] = new Tank(tanks[player-1].x, tanks[player-1].y);
-      }
-      else {
-        tank[player] = new Tank(0, 0);
-      }
+      tank[player] = new Tank;
+      _x[player]=0; _y[player]=0;
+      tank[player].setX(0); tank[player].setY(0);
     }
     if (player_live[player] == true) {
       if (button == 1) {
@@ -34,7 +30,8 @@ function connect() {
                    (tank_cell_y[player] == (tank_cell_y[x])) &&
                    (x!=player) ) || (tank_cell_y[player] != (tank_cell_y[x]) ) ) {
                      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                       tank[player].x-=24;
+                       _x[player]-=24;
+                       tank[player].setX(_x[player]);
                        if (tank[player].x < 0) {
                          tank[player].x = 0;
                        }
@@ -45,7 +42,8 @@ function connect() {
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            tank[player].x-=24;
+            _x[player]-=24;
+            tank[player].setX(_x[player]);
             if (tank[player].x < 0) {
               tank[player].x = 0;
             }
@@ -75,7 +73,8 @@ function connect() {
                    (tank_cell_x[player] == (tank_cell_x[x])) &&
                    (x!=player) ) || (tank_cell_x[player] != (tank_cell_x[x]) ) ) {
                   if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                    tank[player].y-=24;
+                    _y[player]-=24;
+                    tank[player].setY(_y[player]);
                     if (tank[player].y < 0) {
                       tank[player].y = 0;
                     }
@@ -86,7 +85,8 @@ function connect() {
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            tank[player].y-=24;
+            _y[player]-=24;
+            tank[player].setY(_y[player]);
             if (tank[player].y < 0) {
               tank[player].y = 0;
             }
@@ -116,7 +116,8 @@ function connect() {
                    (tank_cell_x[player] == (tank_cell_x[x])) &&
                    (x!=player) ) || (tank_cell_x[player] != (tank_cell_x[x]) ) ) {
                      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                       tank[player].y+=24;
+                       _y[player]+=24;
+                       tank[player].setY(_y[player]);
                        if (tank[player].y > cell_size * y_count) {
                          tank[player].y = cell_size * y_count;
                        }
@@ -127,7 +128,8 @@ function connect() {
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            tank[player].y+=24;
+            _y[player]+=24;
+            tank[player].setY(_y[player]);
             if (tank[player].y > cell_size * y_count) {
               tank[player].y = cell_size * y_count;
             }
@@ -156,7 +158,8 @@ function connect() {
                    (tank_cell_y[player] == (tank_cell_y[x])) &&
                    (x!=player) ) || (tank_cell_y[player] != (tank_cell_y[x]) ) ) {
                      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                       tank[player].x+=24;
+                       _x[player]+=24;
+                       tank[player].setX(_x[player]);
                        if (tank[player].x > cell_size * x_count) {
                          tank[player].x = cell_size * x_count;
                        }
@@ -167,7 +170,8 @@ function connect() {
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            tank[player].x+=24;
+            _x[player]+=24;
+            tank[player].setX(_x[player]);
             if (tank[player].x > cell_size * x_count) {
               tank[player].x = cell_size * x_count;
             }
@@ -188,9 +192,9 @@ function post_level_map(){
     arr_tank.push({id:i, x: this.x, y: this.y, i:this.i});
     });
   arr_tank.shift();
-  console.log(arr_tank)
+  console.log(arr_tank);
   $.ajax({
-    url: "welcome/index",
+    url: "/multiplayer/index",
     type: "post",
     dataType: "json",
     data: {

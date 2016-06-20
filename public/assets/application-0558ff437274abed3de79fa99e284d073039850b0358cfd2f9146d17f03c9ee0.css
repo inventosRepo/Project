@@ -1,0 +1,157 @@
+:-webkit-full-screen{
+  background: white;
+}
+
+:-moz-full-screen {
+  background: white;
+}
+
+:full-screen {
+  background: white;
+}
+
+#btn_fs{
+  position:absolute;
+  color: white;
+  left: 60%;
+  top: 1%;
+  background-color:black;
+}
+#map{
+  background-color:black;
+  height:600px;
+  width:600px;
+  float:left;
+  margin-right: 50px;
+}
+
+#chat-log{
+  overflow: scroll;
+  height: 440px;
+}
+
+#block{
+  position:absolute;
+  height:64px;
+  width:64px;
+}
+
+.btn_dir input{
+  width: 100%;
+  pointer-events: none;
+}
+
+#left{
+  left: 1%;
+  width:30%;
+  height:30%;
+  position: absolute;
+  top: 30%;
+  background-image: url(left.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#top{
+  width:30%;
+  height:30%;
+  position: absolute;
+  left: 20%;
+  top:5%;
+  background-image: url(up.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#right{
+  width:30%;
+  height:30%;
+  position: absolute;
+  left: 39%;
+  top: 30%;
+  background-image: url(right.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#down{
+  width:30%;
+  height:30%;
+  position: absolute;
+  left: 20%;
+  top: 50%;
+  background-image: url(down.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+#fire{
+  width:50%;
+  height:50%;
+  position: absolute;
+  top: 17%;
+  left: 65%;
+  background-image: url(fire.png);
+  background-size: contain;
+  background-repeat: no-repeat;
+}
+
+
+@media (max-width: 480px) {
+  #left{
+    top: 20%;
+    left: 1%;
+    width:20%;
+    height:20%;
+  }
+
+  #right{
+    top: 20%;
+    width:20%;
+    height:20%;
+  }
+
+  #fire{
+    top: 15%;
+    width:30%;
+    height:30%;
+  }
+
+  #down{
+    top:35%;
+    width:20%;
+    height:20%;
+  }
+
+  #top{
+    width:20%;
+    height:20%;
+  }
+
+}
+/*
+ * This is a manifest file that'll be compiled into application.css, which will include all the files
+ * listed below.
+ *
+ * Any CSS and SCSS file within this directory, lib/assets/stylesheets, vendor/assets/stylesheets,
+ * or any plugin's vendor/assets/stylesheets directory can be referenced here using a relative path.
+ *
+ * You're free to add application-wide styles to this file and they'll appear at the bottom of the
+ * compiled file so the styles you add here take precedence over styles defined in any styles
+ * defined in the other CSS/SCSS files in this directory. It is generally better to create a new
+ * file per style scope.
+ *
+
+
+ */
+
+
+
+.cell {
+width: 50px;
+height:50px;
+float: left;
+background-size: cover;
+}
+
+

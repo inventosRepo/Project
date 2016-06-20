@@ -5,6 +5,8 @@ Rails.application.routes.draw do
   get 'code/hi'
   post 'code/new'
   get 'code/new'
+  get 'welcome/change_level'
+  post 'welcome/change_level'
   post 'welcome/new'
   post 'welcome/connecting'
   post 'welcome/disconnect'
@@ -12,6 +14,9 @@ Rails.application.routes.draw do
   post 'welcome/index'
   post 'welcome/generate_code'
   get 'welcome/generate_code'
+  get 'multiplayer/index', as: 'multiplayer'
+  post 'multiplayer/index'
+  get 'singleplayer/index', as: 'singleplayer'
   resources :welcome do
     member do
       post 'new'

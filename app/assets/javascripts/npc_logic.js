@@ -1,76 +1,131 @@
 function npc_movement() {
-  random_move = Math.floor((Math.random()*4)+1);
-  switch (random_move) {
-    case 1:
-    tank_NPC.i = 1;
-
-    var cur_cel_x = (2 * tank_NPC.x) / 48;
-    var cur_cel_y = (2 * tank_NPC.y) / 48;
-    var test_1 = level_map[cur_cel_y][cur_cel_x-1];
-    var test_2 = level_map[cur_cel_y+1][cur_cel_x-1];
-
-    if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-      tank_NPC.x-=24;
-      if (tank_NPC.x < 0) {
-        tank_NPC.x = 0;
-      }
-    }
-    break;
-
-    case 2:
-    tank_NPC.i = 2;
-
-    var cur_cel_x = (2 * tank_NPC.x) / 48;
-    var cur_cel_y = (2 * tank_NPC.y) / 48;
-    if (cur_cel_y) {
-      var test_1 = _Map[cur_cel_y-1][cur_cel_x];
-      var test_2 = _Map[cur_cel_y-1][cur_cel_x+1];
-
-      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-        tank_NPC.y-=24;
-        if (tank_NPC.y < 0) {
-          tank_NPC.y = 0;
+  var random_move = Math.floor((Math.random()*4)+1);
+  var random_tank = Math.floor(Math.random()*3);
+    if (npc_live[random_tank] == true) {
+      switch (random_move) {
+        case 1:
+        for (x = 0; x < npc_tank.length; x++) {
+          if (npc_tank[x] != null) {
+            npc_tank_cell_x[x] = parseInt(npc_tank[x].x/cell_size);
+            npc_tank_cell_y[x] = parseInt(npc_tank[x].y/cell_size);
+          }
         }
-      }
-    }
-    break;
+        npc_tank[random_tank].i = 1;
+        var cur_cel_x = (2 * npc_tank[random_tank].x) / 48;
+        var cur_cel_y = (2 * npc_tank[random_tank].y) / 48;
+        var test_1 = level_map[cur_cel_y][cur_cel_x-1];
+        var test_2 = level_map[cur_cel_y+1][cur_cel_x-1];
+          for (x = 0; x < npc_tank.length; x++) {
+            if ( ( (npc_tank_cell_x[random_tank] != (npc_tank_cell_x[x]+2)) &&
+                   (npc_tank_cell_y[random_tank] == (npc_tank_cell_y[x])) &&
+                   (x!=random_tank) ) || (npc_tank_cell_y[random_tank] != (npc_tank_cell_y[x]) ) ) {
+                     if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
+                       npc_tank[random_tank].x-=24;
+                       if (npc_tank[random_tank].x < 0) {
+                         npc_tank[random_tank].x = 0;
+                       }
+                       return false;
+                     }
+            }
+          }
+        break;
 
-    case 3:
-    tank_NPC.i = 3;
-
-    var cur_cel_x = (2 * tank_NPC.x) / 48;
-    var cur_cel_y = (2 * tank_NPC.y) / 48;
-    if (cur_cel_y+2 < _Y_count) {
-      var test_1 = _Map[cur_cel_y+2][cur_cel_x];
-      var test_2 = _Map[cur_cel_y+2][cur_cel_x+1];
-
-      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-        tank_NPC.y+=24;
-        if (tank_NPC.y > 576) { //CellSize * (_Y_count-2)
-          tank_NPC.y = 576;
+        case 2:
+        for (x = 0; x < npc_tank.length; x++) {
+          if (npc_tank[x]!=null) {
+            npc_tank_cell_x[x] = parseInt(npc_tank[x].x/cell_size)
+            npc_tank_cell_y[x] = parseInt(npc_tank[x].y/cell_size);
+          }
         }
+
+        npc_tank[random_tank].i = 2;
+
+        var cur_cel_x = (2 * npc_tank[random_tank].x) / 48;
+        var cur_cel_y = (2 * npc_tank[random_tank].y) / 48;
+        var test_1 = level_map[cur_cel_y-1][cur_cel_x];
+        var test_2 = level_map[cur_cel_y-1][cur_cel_x+1];
+
+          for (x = 0; x < npc_tank.length; x++) {
+            if ( ( (npc_tank_cell_y[random_tank] != (npc_tank_cell_y[x]+2)) &&
+                   (npc_tank_cell_x[random_tank] == (npc_tank_cell_x[x])) &&
+                   (x!=random_tank) ) || (npc_tank_cell_x[random_tank] != (npc_tank_cell_x[x]) ) ) {
+                  if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
+                    npc_tank[random_tank].y-=24;
+                    if (npc_tank[random_tank].y < 0) {
+                      npc_tank[random_tank].y = 0;
+                    }
+                  }
+                  return false;
+            }
+          }
+        break;
+
+        case 3:
+        for (x = 0; x < npc_tank.length; x++) {
+          if (npc_tank[x]!=null) {
+            npc_tank_cell_x[x] = parseInt(npc_tank[x].x/cell_size)
+            npc_tank_cell_y[x] = parseInt(npc_tank[x].y/cell_size);
+          }
+        }
+
+        npc_tank[random_tank].i = 3;
+
+        var cur_cel_x = (2 * npc_tank[random_tank].x) / 48;
+        var cur_cel_y = (2 * npc_tank[random_tank].y) / 48;
+        var test_1 = level_map[cur_cel_y+2][cur_cel_x];
+        var test_2 = level_map[cur_cel_y+2][cur_cel_x+1];
+
+          for (x = 0; x < npc_tank.length; x++) {
+            if ( ( (npc_tank_cell_y[random_tank] != (npc_tank_cell_y[x]-2)) &&
+                   (npc_tank_cell_x[random_tank] == (npc_tank_cell_x[x])) &&
+                   (x!=random_tank) ) || (npc_tank_cell_x[random_tank] != (npc_tank_cell_x[x]) ) ) {
+                     if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
+                       npc_tank[random_tank].y+=24;
+                       if (npc_tank[random_tank].y > cell_size * y_count) {
+                         npc_tank[random_tank].y = cell_size * y_count;
+                       }
+                     }
+                     return false;
+            }
+          }
+        break;
+
+        case 4:
+        for (x = 0; x < npc_tank.length; x++) {
+          if (npc_tank[x]!=null) {
+            npc_tank_cell_x[x] = parseInt(npc_tank[x].x/cell_size);
+            npc_tank_cell_y[x] = parseInt(npc_tank[x].y/cell_size);
+          }
+        }
+
+        npc_tank[random_tank].i = 0;
+
+        var cur_cel_x = (2 * npc_tank[random_tank].x) / 48;
+        var cur_cel_y = (2 * npc_tank[random_tank].y) / 48;
+        var test_1 = level_map[cur_cel_y][cur_cel_x+2];
+        var test_2 = level_map[cur_cel_y+1][cur_cel_x+2];
+
+          for (x = 0; x < npc_tank.length; x++) {
+            if ( ( (npc_tank_cell_x[random_tank] != (npc_tank_cell_x[x]-2)) &&
+                   (npc_tank_cell_y[random_tank] == (npc_tank_cell_y[x])) &&
+                   (x!=random_tank) ) || (npc_tank_cell_y[random_tank] != (npc_tank_cell_y[x]) ) ) {
+                     if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
+                       npc_tank[random_tank].x+=24;
+                       if (npc_tank[random_tank].x > cell_size * x_count) {
+                         npc_tank[random_tank].x = cell_size * x_count;
+                       }
+                     }
+                     return false;
+            }
+          }
+        break;
       }
     }
-    break;
-
-    case 4:
-    tank_NPC.i = 0;
-
-    var cur_cel_x = (2 * tank_NPC.x) / 48;
-    var cur_cel_y = (2 * tank_NPC.y) / 48;
-    var test_1 = _Map[cur_cel_y][cur_cel_x+2];
-    var test_2 = _Map[cur_cel_y+1][cur_cel_x+2];
-
-    if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-      tank_NPC.x+=24;
-      if (tank_NPC.x > 576) { //cell_size * (x_count-2)
-        tank_NPC.x = 576;
-      }
-    }
-    break;
-  }
 }
 
 function npc_shot() {
-  npc_bullets.push(new Bullet(tank_NPC.i, tank_NPC.x+12, tank_NPC.y+12, 1));
+  var random_shot = Math.floor((Math.random()*2));
+  if (npc_live[random_shot] == true) {
+    npc_bullets[random_shot].push(new Bullet(npc_tank[random_shot].i, npc_tank[random_shot].x+12, npc_tank[random_shot].y+12, 1));
+  }
 }

@@ -8,4 +8,11 @@ Rails.application.config.assets.version = '1.0'
 
 # Precompile additional assets.
 # application.js, application.css, and all non-JS/CSS in app/assets folder are already added.
-# Rails.application.config.assets.precompile += %w( search.js )
+Rails.application.config.assets.precompile += %w(single_game.js)
+Rails.application.config.assets.precompile += %w(single_player_logic.js)
+Rails.application.config.assets.precompile += %w(single_bullet_logic.js)
+Rails.application.config.assets.precompile += %w(npc_logic.js)
+Rails.application.config.assets.precompile += %w(npc_bullet_logic.js)
+Rails.application.config.assets.precompile += %w(multi_game.js.erb)
+Rails.application.config.assets.precompile += %w(multi_player_logic.js)
+Rails.application.config.assets.precompile += %w(multi_bullet_logic.js)

@@ -1,0 +1,15 @@
+<script>
+	var port = '<%=APP_CONFIG[:ws_port]%>';
+	var level_map = JSON.parse('<%=@level_map%>');
+	var current_id = '<%= current_user.id %>';
+</script>
+<script type = 'text/javascript' src = '<%= asset_path('single_game.js.erb') %>'></script>
+<script type = 'text/javascript' src = '<%= asset_path('single_player_logic.js') %>'></script>
+<script type = 'text/javascript' src = '<%= asset_path('single_bullet_logic.js') %>'></script>
+<script type = 'text/javascript' src = '<%= asset_path('npc_logic.js') %>'></script>
+<script type = 'text/javascript' src = '<%= asset_path('npc_bullet_logic.js') %>'></script>
+
+<h1 align="center">Battle city</h1>
+<div>
+  <div><canvas align="left" id="map" width="600" height="600"></canvas></div>
+</div>

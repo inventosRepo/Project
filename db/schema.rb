@@ -43,6 +43,8 @@ ActiveRecord::Schema.define(version: 20160524042454) do
     t.datetime "created_at",                                      null: false
     t.datetime "updated_at",                                      null: false
     t.string   "code",                   limit: 255
+    t.integer  "player_x",               limit: 4,   default: 0
+    t.integer  "player_y",               limit: 4,   default: 0
     t.datetime "creatingtime"
     t.string   "playersid",              limit: 255
   end

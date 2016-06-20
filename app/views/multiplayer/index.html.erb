@@ -1,0 +1,43 @@
+<script>
+	var port = '<%=APP_CONFIG[:ws_port]%>';
+	var level_map = JSON.parse('<%=@level_map%>');
+	var tanks = JSON.parse(gon.arr_tanks);
+	var current_id = '<%= current_user.id %>';
+</script>
+
+<script type = 'text/javascript' src = '<%= asset_path('multi_game.js.erb') %>'></script>
+<script type = 'text/javascript' src = '<%= asset_path('multi_bullet_logic.js') %>'></script>
+<script type = 'text/javascript' src = '<%= asset_path('multi_player_logic.js') %>'></script>
+
+<h1 align="center">Battle city</h1>
+<div>
+
+	<div><canvas align="left" id="map" width="600" height="600"></canvas></div>
+	<%= button_to "Создать игру", new_welcome_path %>
+	<%= button_to "Удалить(отключиться)", welcome_disconnect_path%>
+	<p class ="code">Ваш код: <%=@user.code%></p>
+	<%= button_to "Сгенерировать код", welcome_generate_code_path, remote: true %>
+	<%= button_to "Change level", welcome_change_level_path, remote: true %>
+	<button onclick = 'post_level_map()'>Сохранить игру</button>
+  <div style ="float:right">
+		<h2>Доступные игры</h2>
+		<%@games.each do |game|%>
+			<ul>
+				<li>
+					<%= game.player1 %>
+					<%= button_to "присоединится", welcome_connecting_path(:currentgame => game.player1) %>
+				</li>
+			</ul>
+		<% end %>
+	</div>
+
+	<div style ="margin-left: 20%">
+		<h2>Идет игра</h2>
+		<%@ingames.each do |game|%>
+			<ul>
+				<li><%= game.player1 %> VS <%= game.player2 %></li>
+			</ul>
+		<% end %>
+	</div>
+
+</div>

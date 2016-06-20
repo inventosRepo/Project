@@ -1,4 +1,7 @@
 server '10.42.0.89', user: 'sergey', roles: %w{web app}
+
+server 'ip', user: 'root', roles: %w{web app}
+
 # server-based syntax
 # ======================
 # Defines a single server with a list of roles and multiple properties.

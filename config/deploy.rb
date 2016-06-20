@@ -2,6 +2,7 @@
 lock '3.5.0'
 
 set :application, 'tanks'
+
 set :repo_url, 'https://github.com/inventosrepo/project'
 set :branch, 'master'
 

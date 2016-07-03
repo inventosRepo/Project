@@ -13,10 +13,13 @@
 		<p>
       <%= link_to 'singleplayer', singleplayer_path %>
     </p>
+		<p class ="code">Ваш код: <%=current_user.code%></p>
+		<%= button_to "Сгенерировать код", welcome_generate_code_path, remote: true %>
 
   <% else %>
 		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
 		<%= link_to "выполните вход", new_user_session_path %></p>
 	<% end %>
+
 
 </div>

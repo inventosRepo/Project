@@ -1,7 +1,4 @@
 class CodeController < ApplicationController
-  def new
-  end
-
   def hi
     if params[:code] == '' || !User.exists?(code: params[:code])
       flash[:error] = 'Wrong code. Please try again'

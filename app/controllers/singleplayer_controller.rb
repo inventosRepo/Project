@@ -9,7 +9,9 @@ class SingleplayerController < ApplicationController
                       end
       level = User.where(email: current_user.email).take
       map = Level.find(level.user_level)
-      unless @current_game.nil?
+      if @current_game.nil?
+        @level_map = map.data
+      else
         if user_signed_in? && @current_game.save_game == 0 && !@current_game.nil?
           @level_map = map.data
           @arr_tanks = @current_game.save_arrs_tanks
@@ -28,8 +30,6 @@ class SingleplayerController < ApplicationController
           @current_game.save_game = 1
           @current_game.save
         end
-      else
-        @level_map = map.data
       end
     end
 

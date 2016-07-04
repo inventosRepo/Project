@@ -36,17 +36,6 @@ class MultiplayerController < ApplicationController
 
     @games = Field.where(online_players: '1')
     @ingames = Field.where(online_players: '2')
-    @pos_x = params[:pos_x]
-    @pos_y = params[:pos_y]
-    # pos_writing
-    if @pos_x.nil? && @pos_y.nil?
-      @user.player_x = 0
-      @user.player_y = 0
-    else
-      @user.player_x = @pos_x
-      @user.player_y = @pos_y
-    end
-    @user.save
     respond_to do |format|
       format.html
       format.json { render json: @user }
@@ -107,5 +96,21 @@ class MultiplayerController < ApplicationController
       end
     end
     redirect_to multiplayer_index_path
+  end
+
+  def set_pos
+    # pos_writing
+    if user_signed_in?
+      @user = User.where(email: current_user.email).take
+      @pos_x = params[:pos_x]
+      @pos_y = params[:pos_y]
+      @user.player_x = @pos_x
+      @user.player_y = @pos_y
+      @user.save
+    end
+    respond_to do |format|
+      format.html
+      format.json { render json: @user }
+    end
   end
 end

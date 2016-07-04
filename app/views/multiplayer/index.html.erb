@@ -1,7 +1,6 @@
 <script>
 	var port = '<%=APP_CONFIG[:ws_port]%>';
 	var level_map = JSON.parse('<%=@level_map%>');
-	var tanks = JSON.parse(gon.arr_tanks);
 	var current_id = '<%= current_user.id %>';
 </script>
 
@@ -15,11 +14,11 @@
 		<%= link_to 'exit', user_root_path %>
 	</p>
 
-	<div><canvas align="left" id="map" width="600" height="600"></canvas></div>
+	<div><canvas align="left" id="map" width="624" height="624"></canvas></div>
 	<%= button_to "Создать игру", multiplayer_new_path %>
-	<%= button_to "Удалить(отключиться)", multiplayer_disconnect_path%>	
-	<%= button_to "Change level", multiplayer_change_level_path, remote: true %>
-	<button onclick = 'post_level_map()'>Сохранить игру</button>
+	<%= button_to "Удалить(отключиться)", multiplayer_disconnect_path%>
+	<button onclick = 'post_level_map()'>Сохранить карту</button>
+	<button onclick = 'post_tank_pos()'>Сохранить позицию</button>
   <div style ="float:right">
 		<h2>Доступные игры</h2>
 		<%@games.each do |game|%>

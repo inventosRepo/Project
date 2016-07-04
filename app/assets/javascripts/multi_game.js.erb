@@ -1,7 +1,5 @@
 // player_variables
 var player = 0;
-var _x = [];
-var _y = [];
 var tank = [];
 var tank_cell_x = [];
 var tank_cell_y = [];
@@ -36,38 +34,12 @@ function Tank_object (image) {
 
 function Tank () {
   var self = this;
-  this.getX = function () {
+  this.set_pos = function () {
     $.ajax({
           type: "GET",
           dataType: "json",
           url: "/multiplayer/index",
-          success: function (data) { return data.player_x; }
-      });
-  };
-  this.getY = function () {
-    $.ajax({
-          type: "GET",
-          dataType: "json",
-          url: "/multiplayer/index",
-          success: function (data) { return data.player_y; }
-      });
-  };
-  this.setX = function (x) {
-    $.ajax({
-          type: "POST",
-          dataType: "json",
-          data: { pos_x: JSON.stringify(x) },
-          url: "/multiplayer/index",
-          success: function (data) { self.x = data.player_x; draw_players(); draw_scene(); }
-      });
-  };
-  this.setY = function (y) {
-    $.ajax({
-          type: "POST",
-          dataType: "json",
-          data: { pos_y: JSON.stringify(y) },
-          url: "/multiplayer/index",
-          success: function (data) { self.y = data.player_y; draw_players(); draw_scene(); }
+          success: function (data) { self.x = data.player_x; self.y = data.player_y; }
       });
   };
 }
@@ -127,6 +99,7 @@ function draw_scene() {
   }
   context.restore();
   draw_players();
+  move_bullets();
 }
 
 $(function() {
@@ -152,7 +125,7 @@ $(function() {
   img_tank = new Image();
   img_tank.src = '<%= asset_path("tank.png") %>';
 
-  setInterval(move_bullets, 50); //redraw scene every 50 ms
+  setInterval(draw_scene, 50); //redraw scene every 50 ms
 
   var tank = new Tank_object(img_tank);
   Tank.prototype = tank;

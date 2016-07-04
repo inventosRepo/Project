@@ -4,7 +4,7 @@ class WelcomeController < ApplicationController
     @user = User.where(email: current_user.email).take
     @user.generate_code
     respond_to do |format|
-      format.js
+      format.js { render json: @user }
     end
   end
 end

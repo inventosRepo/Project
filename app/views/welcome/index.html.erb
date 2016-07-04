@@ -1,3 +1,13 @@
+<script type="text/javascript">
+	function generate_code() {
+		$.ajax({
+	    url: "/welcome/generate_code",
+	    type: "post",
+	    dataType: "json",
+	    success: function (data) { $("#code").text('Ваш код: '+ data.code); }
+	  });
+	}
+</script>
 <div id="user_nav">
 
 	<% if user_signed_in?%>
@@ -13,13 +23,13 @@
 		<p>
       <%= link_to 'singleplayer', singleplayer_path %>
     </p>
-		<p class ="code">Ваш код: <%=current_user.code%></p>
-		<%= button_to "Сгенерировать код", welcome_generate_code_path, remote: true %>
+		<div id = 'code'>Ваш код: <%=current_user.code%></div>
+		<p></p>
+		<button onclick = 'generate_code()'>Сгенирировать код</button>
 
   <% else %>
 		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
 		<%= link_to "выполните вход", new_user_session_path %></p>
 	<% end %>
-
 
 </div>

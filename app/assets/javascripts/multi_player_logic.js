@@ -8,8 +8,7 @@ function connect() {
     if (connected == 'connected') {
       player_live[player] = true;
       tank[player] = new Tank;
-      _x[player]=0; _y[player]=0;
-      tank[player].setX(0); tank[player].setY(0);
+      tank[player].set_pos();
     }
     if (player_live[player] == true) {
       if (button == 1) {
@@ -30,25 +29,22 @@ function connect() {
                    (tank_cell_y[player] == (tank_cell_y[x])) &&
                    (x!=player) ) || (tank_cell_y[player] != (tank_cell_y[x]) ) ) {
                      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                       _x[player]-=24;
-                       tank[player].setX(_x[player]);
+                       tank[player].x-=cell_size;
                        if (tank[player].x < 0) {
                          tank[player].x = 0;
                        }
                      }
-                     return false;
+                     continue;
             }
           }
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            _x[player]-=24;
-            tank[player].setX(_x[player]);
+            tank[player].x-=cell_size;
             if (tank[player].x < 0) {
               tank[player].x = 0;
             }
           }
-          return false;
         };
       }
 
@@ -73,25 +69,22 @@ function connect() {
                    (tank_cell_x[player] == (tank_cell_x[x])) &&
                    (x!=player) ) || (tank_cell_x[player] != (tank_cell_x[x]) ) ) {
                   if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                    _y[player]-=24;
-                    tank[player].setY(_y[player]);
+                    tank[player].y-=cell_size;
                     if (tank[player].y < 0) {
                       tank[player].y = 0;
                     }
                   }
-                  return false;
+                  continue;
             }
           }
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            _y[player]-=24;
-            tank[player].setY(_y[player]);
+            tank[player].y-=cell_size;
             if (tank[player].y < 0) {
               tank[player].y = 0;
             }
           }
-          return false;
         };
       }
 
@@ -116,20 +109,18 @@ function connect() {
                    (tank_cell_x[player] == (tank_cell_x[x])) &&
                    (x!=player) ) || (tank_cell_x[player] != (tank_cell_x[x]) ) ) {
                      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                       _y[player]+=24;
-                       tank[player].setY(_y[player]);
+                       tank[player].y+=cell_size;
                        if (tank[player].y > cell_size * y_count) {
                          tank[player].y = cell_size * y_count;
                        }
                      }
-                     return false;
+                     continue;
             }
           }
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            _y[player]+=24;
-            tank[player].setY(_y[player]);
+            tank[player].y+=cell_size;
             if (tank[player].y > cell_size * y_count) {
               tank[player].y = cell_size * y_count;
             }
@@ -158,25 +149,22 @@ function connect() {
                    (tank_cell_y[player] == (tank_cell_y[x])) &&
                    (x!=player) ) || (tank_cell_y[player] != (tank_cell_y[x]) ) ) {
                      if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-                       _x[player]+=24;
-                       tank[player].setX(_x[player]);
+                       tank[player].x+=cell_size;
                        if (tank[player].x > cell_size * x_count) {
                          tank[player].x = cell_size * x_count;
                        }
                      }
-                     return false;
+                     continue;
             }
           }
         }
         else {
           if ((test_1 == 0 || test_1 == 3) && (test_2 == 0 || test_2 == 3)) {
-            _x[player]+=24;
-            tank[player].setX(_x[player]);
+            tank[player].x+=cell_size;
             if (tank[player].x > cell_size * x_count) {
               tank[player].x = cell_size * x_count;
             }
           }
-          return false;
         };
       }
       if (button == 5) {
@@ -187,19 +175,20 @@ function connect() {
 }
 
 function post_level_map(){
-  var arr_tank = [];
-  $.each(tank, function(i){
-    arr_tank.push({id:i, x: this.x, y: this.y, i:this.i});
-    });
-  arr_tank.shift();
-  console.log(arr_tank);
   $.ajax({
     url: "/multiplayer/index",
-    type: "post",
+    type: "POST",
     dataType: "json",
-    data: {
-      lvlmap: JSON.stringify(level_map),
-      arrs_tanks: JSON.stringify(arr_tank)
-    }
+    data: { lvlmap: JSON.stringify(level_map) }
+  });
+}
+
+function post_tank_pos(){
+  $.ajax({
+    url: "/multiplayer/set_pos",
+    type: "POST",
+    dataType: "json",
+    data: { pos_x: JSON.stringify(tank[player].x),
+            pos_y: JSON.stringify(tank[player].y)}
   });
 }

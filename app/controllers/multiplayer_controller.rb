@@ -8,26 +8,20 @@ class MultiplayerController < ApplicationController
                       else
                         Field.where(player2: current_user.email).take
                       end
-      level = User.where(email: current_user.email).take
-      map = Level.find(level.user_level)
+      map = Level.find(@user.user_level)
       if @current_game.nil?
         @level_map = map.data
       else
         if user_signed_in? && @current_game.save_game == 0 && !@current_game.nil?
           @level_map = map.data
-          @arr_tanks = @current_game.save_arrs_tanks
         else
           @level_map = @current_game.map
-          @arr_tanks = @current_game.save_arrs_tanks
         end
-        gon.arr_tanks = @arr_tanks
 
         @save_level = params[:lvlmap]
-        @save_arrs_tanks = params[:arrs_tanks]
         # Запись в бд
         unless @save_level.nil?
           @current_game.map = @save_level
-          @current_game.save_arrs_tanks = @save_arrs_tanks
           @current_game.save_game = 1
           @current_game.save
         end
@@ -39,12 +33,6 @@ class MultiplayerController < ApplicationController
     respond_to do |format|
       format.html
       format.json { render json: @user }
-    end
-
-    if user_signed_in?
-      @players = User.where(email: current_user.email).take if user_signed_in?
-      @players.user_level = 1
-      @players.save
     end
   end
 

@@ -30,10 +30,6 @@ class MultiplayerController < ApplicationController
 
     @games = Field.where(online_players: '1')
     @ingames = Field.where(online_players: '2')
-    respond_to do |format|
-      format.html
-      format.json { render json: @user }
-    end
   end
 
   def new
@@ -89,12 +85,16 @@ class MultiplayerController < ApplicationController
   def set_pos
     # pos_writing
     if user_signed_in?
-      @user = User.where(email: current_user.email).take
-      @pos_x = params[:pos_x]
-      @pos_y = params[:pos_y]
-      @user.player_x = @pos_x
-      @user.player_y = @pos_y
-      @user.save
+      user_id = params[:user_id]
+      pos_x = params[:pos_x]
+      pos_y = params[:pos_y]
+      @user = User.where(id: user_id).take
+      if pos_x.nil? && pos_y.nil?
+      else
+        @user.player_x = pos_x
+        @user.player_y = pos_y
+        @user.save
+      end
     end
     respond_to do |format|
       format.html

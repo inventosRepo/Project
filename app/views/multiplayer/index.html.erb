@@ -18,7 +18,6 @@
 	<%= button_to "Создать игру", multiplayer_new_path %>
 	<%= button_to "Удалить(отключиться)", multiplayer_disconnect_path%>
 	<button onclick = 'post_level_map()'>Сохранить карту</button>
-	<button onclick = 'post_tank_pos()'>Сохранить позицию</button>
   <div style ="float:right">
 		<h2>Доступные игры</h2>
 		<%@games.each do |game|%>

@@ -42,6 +42,12 @@
       }
     }
 
+    function save_event(id, bt_id) {
+      document.getElementById(id).onclick =  function() {
+        btn_id = bt_id; send(player);
+      }
+    }
+
     connect(player);
 
     btn_event("left", 1, move_speed);
@@ -49,4 +55,5 @@
     btn_event("down", 3, move_speed);
     btn_event("right", 4, move_speed);
     btn_event("fire", 5, fire_speed);
+    save_event("save", 6);
 }

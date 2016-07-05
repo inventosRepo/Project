@@ -10,6 +10,7 @@ Rails.application.routes.draw do
   post 'multiplayer/new'
   post 'multiplayer/connecting'
   post 'multiplayer/disconnect'
+  get 'multiplayer/set_pos'
   post 'multiplayer/set_pos'
   post 'multiplayer/index'
   post 'welcome/generate_code'

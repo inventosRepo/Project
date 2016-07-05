@@ -4,6 +4,7 @@
 		var name = '<%=current_user.email %>';
 		var port = '<%=APP_CONFIG[:ws_port]%>';
 		var player = '<%=current_user.playersid %>';
+		var user_id = '<%=current_user.email %>';
 	</script>
 	<script src="scripts/fullscreen.js"></script>
 	<script src="scripts/direction.js"></script>
@@ -16,6 +17,7 @@
 			<div id="fire" class="btn_dir"></div>
 		</div>
 		<div onclick="enterFullscreen()" id="btn_fs">На весь экран</div>
+		<div id="save" align="center"><button>Сохранить позицию</button></div>
 	<% else %>
   <%=form_tag code_hi_path do |f| %>
 	   <label for="code">Введите код</label>

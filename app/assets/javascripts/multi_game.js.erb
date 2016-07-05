@@ -1,5 +1,4 @@
 // player_variables
-var player = 0;
 var tank = [];
 var tank_cell_x = [];
 var tank_cell_y = [];
@@ -34,12 +33,13 @@ function Tank_object (image) {
 
 function Tank () {
   var self = this;
-  this.set_pos = function () {
+  this.set_pos = function (player) {
     $.ajax({
           type: "GET",
           dataType: "json",
-          url: "/multiplayer/index",
-          success: function (data) { self.x = data.player_x; self.y = data.player_y; }
+          url: "/multiplayer/set_pos",
+          data: { user_id: player },
+          success: function (data) { console.log(data); self.x = data.player_x; self.y = data.player_y; }
       });
   };
 }

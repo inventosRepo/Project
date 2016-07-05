@@ -3,12 +3,12 @@ function connect() {
     var msg = JSON.parse(event.data);
     var button = msg.button_id;
     var connected = msg.connect_id;
-    player = msg.player_id;
+    var player = msg.player_id;
 
     if (connected == 'connected') {
       player_live[player] = true;
       tank[player] = new Tank;
-      tank[player].set_pos();
+      tank[player].set_pos(player);
     }
     if (player_live[player] == true) {
       if (button == 1) {
@@ -167,8 +167,20 @@ function connect() {
           }
         };
       }
+
       if (button == 5) {
         bullets[player].push(new Bullet(tank[player].i, tank[player].x+12, tank[player].y+12, 1));
+      }
+
+      if (button == 6) {
+        $.ajax({
+          url: "/multiplayer/set_pos",
+          type: "POST",
+          dataType: "json",
+          data: { user_id: player,
+                  pos_x: JSON.stringify(tank[player].x),
+                  pos_y: JSON.stringify(tank[player].y)}
+        });
       }
     }
   }
@@ -180,15 +192,5 @@ function post_level_map(){
     type: "POST",
     dataType: "json",
     data: { lvlmap: JSON.stringify(level_map) }
-  });
-}
-
-function post_tank_pos(){
-  $.ajax({
-    url: "/multiplayer/set_pos",
-    type: "POST",
-    dataType: "json",
-    data: { pos_x: JSON.stringify(tank[player].x),
-            pos_y: JSON.stringify(tank[player].y)}
   });
 }

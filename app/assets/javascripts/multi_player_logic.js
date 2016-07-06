@@ -180,7 +180,8 @@ function connect() {
           dataType: "json",
           data: { user_id: player,
                   pos_x: JSON.stringify(tank[player].x),
-                  pos_y: JSON.stringify(tank[player].y)}
+                  pos_y: JSON.stringify(tank[player].y),
+                  pos_i: JSON.stringify(tank[player].i)}
         });
       }
     }

@@ -14,7 +14,7 @@
           var msg = {
             player_id: player,
             button_id: 0,
-            connect_id: 'connected'
+            action: 'connect'
           };
           socket[player].send(JSON.stringify(msg));
         }
@@ -26,7 +26,8 @@
     function send(player) {
       var msg = {
         player_id: player,
-        button_id: btn_id
+        button_id: btn_id,
+        action: 'send'
       };
       try {
         socket[player].send(JSON.stringify(msg));

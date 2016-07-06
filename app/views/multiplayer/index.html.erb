@@ -1,7 +1,7 @@
 <script>
 	var port = '<%=APP_CONFIG[:ws_port]%>';
 	var level_map = JSON.parse('<%=@level_map%>');
-	var current_id = '<%= current_user.id %>';
+	var player = '<%= current_user.id %>';
 </script>
 
 <script type = 'text/javascript' src = '<%= asset_path('multi_game.js.erb') %>'></script>

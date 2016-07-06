@@ -29,15 +29,19 @@ function bullet_collision (i, j) {
   //bullet out of level
   if (bullet_cell_x[j] < 0) {
     bullets[j].splice(i, 1);
+    return false;
   }
   if (bullet_cell_x[j] > x_count) {
     bullets[j].splice(i, 1);
+    return false;
   }
   if (bullet_cell_y[j] < 0) {
     bullets[j].splice(i, 1);
+    return false;
   }
   if (bullet_cell_y[j] > y_count-1) {
     bullets[j].splice(i, 1);
+    return false;
   }
   //
   //collisions

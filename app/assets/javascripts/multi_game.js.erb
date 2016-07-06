@@ -20,8 +20,7 @@ var tank_width = 48;
 var tank_heigth = 48;
 
 // connection_variables
-var host;
-var socket = [];
+var host, socket;
 
 // Objects
 function Tank_object (image) {
@@ -105,7 +104,15 @@ function draw_scene() {
 $(function() {
   //connection init
   host = "ws://"+window.location.hostname.toString()+":"+port;
-  socket[current_id] = new WebSocket (host);
+  socket = new WebSocket (host);
+  socket.onopen = function () {
+    var msg = {
+      button_id: 0,
+      player_id: player,
+      action: 'connect'
+    };
+    socket.send(JSON.stringify(msg));
+  }
   //canvas init
   canvas = document.getElementById('map');
   canvas.width  = x_count * cell_size;

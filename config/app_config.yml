@@ -1,5 +1,6 @@
 default: &default
-  ws_port: 3004
+  ws_m_port: 3010
+  ws_s_port: 3020
 
 development:
   <<: *default

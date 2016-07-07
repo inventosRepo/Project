@@ -1,12 +1,12 @@
 function connect() {
-  socket[current_id].onmessage = function (event) {
+  socket.onmessage = function (event) {
     var msg = JSON.parse(event.data);
     var button = msg.button_id;
-    var connected = msg.connect_id;
+    var connected = msg.action;
 
     var player = msg.player_id;
 
-    if (connected == 'connected') {
+    if (connected == 'connect') {
       player_live = true;
       tank = new Tank(0, 0);
     }

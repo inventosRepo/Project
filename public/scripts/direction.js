@@ -1,4 +1,5 @@
   window.onload = function() {
+    var port = 3010;
     var host = "ws://"+window.location.hostname.toString()+":"+port;
     var socket = [];
     var btn_id;
@@ -49,6 +50,14 @@
       }
     }
 
+    function _port(id, prt) {
+      document.getElementById(id).onclick =  function() {
+        port = prt;
+        host = "ws://"+window.location.hostname.toString()+":"+port;
+        connect(player);
+      }
+    }
+
     connect(player);
 
     btn_event("left", 1, move_speed);
@@ -57,4 +66,6 @@
     btn_event("right", 4, move_speed);
     btn_event("fire", 5, fire_speed);
     save_event("save", 6);
+    _port("multi", 3010);
+    _port("single", 3020);
 }

@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160524042454) do
+ActiveRecord::Schema.define(version: 20160706083725) do
 
   create_table "fields", force: :cascade do |t|
     t.string  "player1",         limit: 255
@@ -47,6 +47,7 @@ ActiveRecord::Schema.define(version: 20160524042454) do
     t.integer  "player_y",               limit: 4,   default: 0
     t.datetime "creatingtime"
     t.string   "playersid",              limit: 255
+    t.integer  "player_i",               limit: 4,   default: 1
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

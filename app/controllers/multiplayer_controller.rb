@@ -88,11 +88,13 @@ class MultiplayerController < ApplicationController
       user_id = params[:user_id]
       pos_x = params[:pos_x]
       pos_y = params[:pos_y]
+      pos_i = params[:pos_i]
       @user = User.where(id: user_id).take
-      if pos_x.nil? && pos_y.nil?
+      if pos_x.nil? && pos_y.nil? && pos_i.nil?
       else
         @user.player_x = pos_x
         @user.player_y = pos_y
+        @user.player_i = pos_i
         @user.save
       end
     end

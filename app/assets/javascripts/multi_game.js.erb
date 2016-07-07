@@ -26,7 +26,6 @@ var host, socket;
 function Tank_object (image) {
   this.w = tank_width;
   this.h = tank_heigth;
-  this.i = 1;
   this.image = image;
 }
 
@@ -38,7 +37,7 @@ function Tank () {
           dataType: "json",
           url: "/multiplayer/set_pos",
           data: { user_id: player },
-          success: function (data) { console.log(data); self.x = data.player_x; self.y = data.player_y; }
+          success: function (data) { console.log(data); self.x = data.player_x; self.y = data.player_y; self.i = data.player_i; }
       });
   };
 }

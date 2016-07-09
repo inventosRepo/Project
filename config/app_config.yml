@@ -1,6 +1,8 @@
 default: &default
   ws_m_port: 3010
   ws_s_port: 3020
+  vk_app_ip: 5540727
+  vk_app_key: JCb9Q9Yp0V5DVSO45AE4
 
 development:
   <<: *default

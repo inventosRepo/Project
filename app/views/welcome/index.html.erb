@@ -32,6 +32,7 @@
 		<p class="welcome_signin">
 	Для начала пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
 		<%= link_to "выполните вход", new_user_session_path %></p>
+		<%= link_to "Sign in with vk", user_vkontakte_omniauth_authorize_path %>
 	<% end %>
 
 </div>

@@ -1,4 +1,6 @@
-<h2>Sign fup</h2>
+<div class='col-md-4'></div>
+<div id="user_nav" class='col-md-5 sign_up'>
+<h2>Регистрация</h2>
 
 <%= form_for(resource, as: resource_name, url: registration_path(resource_name)) do |f| %>
   <%= devise_error_messages! %>
@@ -9,21 +11,23 @@
   </div>
 
   <div class="field">
-    <%= f.label :password %>
+    <%= f.label :Введите_пароль %>
     <% if @minimum_password_length %>
-    <em>(<%= @minimum_password_length %> characters minimum)</em>
+    <em>(<%= @minimum_password_length %> символов минимум)</em>
     <% end %><br />
     <%= f.password_field :password, autocomplete: "off" %>
   </div>
 
   <div class="field">
-    <%= f.label :password_confirmation %><br />
+    <%= f.label :Bведите_пароль_еще_раз %><br />
     <%= f.password_field :password_confirmation, autocomplete: "off" %>
   </div>
 
   <div class="actions">
-    <%= f.submit "Sign up" %>
+    <%= f.submit "Продолжить" %>
   </div>
 <% end %>
 
 <%= render "users/shared/links" %>
+</div>
+<div class='col-md-3'></div>

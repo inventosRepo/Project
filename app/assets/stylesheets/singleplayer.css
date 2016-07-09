@@ -1,0 +1,17 @@
+.exit_btn img{
+  width: 10%;
+  float:left;
+}
+
+.exit_btn{
+  margin-top: 20px;
+}
+
+.exit_btn a{
+  font-size: 25px;
+  text-decoration: none;
+}
+
+.title_game h1{
+  color: White;
+}

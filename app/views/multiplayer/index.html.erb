@@ -8,35 +8,68 @@
 <script type = 'text/javascript' src = '<%= asset_path('multi_bullet_logic.js') %>'></script>
 <script type = 'text/javascript' src = '<%= asset_path('multi_player_logic.js') %>'></script>
 
-<h1 align="center">Battle city</h1>
-<div>
-	<p>
-		<%= link_to 'exit', user_root_path %>
-	</p>
-
-	<div><canvas align="left" id="map" width="624" height="624"></canvas></div>
-	<%= button_to "Создать игру", multiplayer_new_path %>
-	<%= button_to "Удалить(отключиться)", multiplayer_disconnect_path%>
-	<button onclick = 'post_level_map()'>Сохранить карту</button>
-  <div style ="float:right">
-		<h2>Доступные игры</h2>
-		<%@games.each do |game|%>
-			<ul>
-				<li>
-					<%= game.player1 %>
-					<%= button_to "присоединится", multiplayer_connecting_path(:currentgame => game.player1) %>
-				</li>
-			</ul>
-		<% end %>
+<div class="header">
+	<div class="row">
+		<div class="col-md-4">
+			<div class="exit_btn">
+				<%=link_to(image_tag("btn_back.png"),user_root_path)%>
+				<p><%= link_to 'В меню', user_root_path %></p>
+			</div>
+		</div>
+		<div class="col-md-4 title_game">
+			<h1 align="center">Battle city multiplayer</h1>
+		</div>
+		<div class="col-md-4 hi">
+			<% if user_signed_in?%>
+			<div class="col-md-6"></div>
+			<div class="col-md-6">
+				<p>	Здравствуйте,</p>
+					<p><%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+				</p>
+			</div>
+			<% end %>
+		</div>
 	</div>
+</div>
 
-	<div style ="margin-left: 20%">
-		<h2>Идет игра</h2>
-		<%@ingames.each do |game|%>
-			<ul>
-				<li><%= game.player1 %> VS <%= game.player2 %></li>
-			</ul>
-		<% end %>
+<div class="game_section_mp">
+	<div class="row">
+			<div class="col-md-6 col-xs-6">
+				<canvas align="left" id="map" width="624" height="624"></canvas>
+			</div>
+
+			<div class="col-md-6 col-xs-6">
+				<div class="row game_btn">
+					<%= button_to "Создать игру", multiplayer_new_path %>
+					<%= button_to "Удалить(отключиться)", multiplayer_disconnect_path%>
+					<button onclick = 'post_level_map()'>Сохранить карту</button>
+				</div>
+
+				<div class="row game_list">
+				  <div class="col-md-6 avaleb_games">
+						<h2>Доступные игры</h2>
+						<hr>
+						<%@games.each do |game|%>
+							<ul>
+								<li>
+									<%= game.player1 %>
+									<%= button_to "присоединится", multiplayer_connecting_path(:currentgame => game.player1) %>
+								</li>
+							</ul>
+						<% end %>
+					</div>
+					<div class='col-md-6 ingame'>
+						<h2>Идет игра</h2>
+						<hr>
+						<%@ingames.each do |game|%>
+							<ul>
+								<li><%= game.player1 %> VS <%= game.player2 %></li>
+							</ul>
+						<% end %>
+					</div>
+				</div>
+
+			</div>
+		</div>
 	</div>
-
 </div>

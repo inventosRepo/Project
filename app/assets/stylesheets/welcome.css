@@ -10,6 +10,44 @@
   background: white;
 }
 
+#code{
+  font-family: Palatino;
+  font-size: 28px;
+}
+
+#user_nav{
+  color:white;
+  font-size: 22px;
+  padding-top: 100px;
+  font-family: Palatino;
+}
+
+#user_nav button{
+  color: green;
+  font-family: Palatino;
+}
+
+#user_nav ul{
+  padding-left: 40%;
+  padding-top: 30px;
+  font-size: 32px;
+}
+
+#user_nav a{
+  color: red;
+  text-decoration: none;
+}
+
+.hi p{
+  color:white;
+}
+.welcome_signin{
+  font-size: 26px;
+  color: white;
+  font-weight: 600;
+  padding-top: 200px;
+}
+
 #btn_fs{
   position:absolute;
   color: white;
@@ -50,6 +88,12 @@
   background-image: url(left.png);
   background-size: contain;
   background-repeat: no-repeat;
+}
+
+body{
+  background-image: url(bg.png);
+  background-size: cover;
+  font-family: Palatino;
 }
 
 #top{

@@ -8,11 +8,26 @@
 <script type = 'text/javascript' src = '<%= asset_path('single_bullet_logic.js') %>'></script>
 <script type = 'text/javascript' src = '<%= asset_path('npc_logic.js') %>'></script>
 <script type = 'text/javascript' src = '<%= asset_path('npc_bullet_logic.js') %>'></script>
+<div class="col-md-4">
+	<div class="exit_btn">
+		<%=link_to(image_tag("btn_back.png"),user_root_path)%>
+		<p><%= link_to 'В меню', user_root_path %></p>
+	</div>
+</div>
+<div class="col-md-4 title_game">
+	<h1 align="center">Battle city</h1>
+</div>
+<div class="col-md-4 hi">
+	<% if user_signed_in?%>
+	<div class="col-md-6"></div>
+	<div class="col-md-6">
+		<p>	Здравствуйте,</p>
+			<p><%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+		</p>
+	</div>
+	<% end %>
+</div>
 
-<h1 align="center">Battle city</h1>
-<p>
-	<%= link_to 'exit', user_root_path %>
-</p>
-<div>
+<div class="game_section">
   <div><canvas align="left" id="map" width="600" height="600"></canvas></div>
 </div>

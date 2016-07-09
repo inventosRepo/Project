@@ -4,32 +4,44 @@
 	    url: "/welcome/generate_code",
 	    type: "post",
 	    dataType: "json",
-	    success: function (data) { $("#code").text('Ваш код: '+ data.code); }
+	    success: function (data) { $("#code").text('Ваш код: ' +  data.code); }
 	  });
 	}
 </script>
-<div id="user_nav">
+<div class="col-md-3">
+</div>
+<div id="user_nav" class='col-md-6'>
 
 	<% if user_signed_in?%>
 
-		<p>
-			Вы вошли как <%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
-    </p>
-
-    <p>
-      <%= link_to 'multiplayer', multiplayer_path %>
-    </p>
-
-		<p>
-      <%= link_to 'singleplayer', singleplayer_path %>
-    </p>
-		<div id = 'code'>Ваш код: <%=current_user.code%></div>
-		<p></p>
+		<p> Перед тем как выбрать режим игры, синхронизируйтесь с вашим устройсвом.
+			Для этого сгенерируйте код и введите его на Вашем телефоне
+		</p>
 		<button onclick = 'generate_code()'>Сгенирировать код</button>
-
+		<br><br>
+		<div id = 'code'>Ваш код: <%=current_user.code%></div>
+		<ul>
+			<li>
+      	<%= link_to 'multiplayer', multiplayer_path %>
+			</li>
+			<li>
+      	<%= link_to 'singleplayer', singleplayer_path %>
+			</li>
+	</ul>
   <% else %>
-		<p>Пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
+		<p class="welcome_signin">
+	Для начала пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
 		<%= link_to "выполните вход", new_user_session_path %></p>
 	<% end %>
 
+</div>
+<div class="col-md-3 hi">
+	<% if user_signed_in?%>
+	<div class="col-md-6"></div>
+	<div class="col-md-6">
+		<p>	Здравствуйте,</p>
+			<p><%=current_user.email %> <%= link_to "Выйти", destroy_user_session_path, :method => :delete %>
+		</p>
+	</div>
+	<% end %>
 </div>

@@ -1,5 +1,6 @@
 class MultiplayerController < ApplicationController
   skip_before_filter :verify_authenticity_token, only: [:index]
+  before_filter :check_for_signed_in
   def index
     if user_signed_in?
       @user = User.where(email: current_user.email).take

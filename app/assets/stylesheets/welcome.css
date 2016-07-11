@@ -10,9 +10,14 @@
   background: white;
 }
 
+.modal-title{
+  color:black;
+}
+
 #code{
   font-family: Palatino;
   font-size: 28px;
+  color:red;
 }
 
 #user_nav{
@@ -25,6 +30,13 @@
 #user_nav button{
   color: green;
   font-family: Palatino;
+  background-color: white;
+}
+
+#user_nav button:hover{
+  color: green;
+  font-family: Palatino;
+  background-color: white;
 }
 
 #user_nav ul{
@@ -173,3 +185,22 @@ body{
   }
 
 }
+
+/*for qr code table*/
+table {
+  border-width: 0;
+  border-style: none;
+  border-color: #0000ff;
+  border-collapse: collapse;
+}
+
+td {
+  border-left: solid 10px #000;
+  padding: 0;
+  margin: 0;
+  width: 0px;
+  height: 10px;
+}
+
+td.black { border-color: #000; }
+td.white { border-color: #fff; }

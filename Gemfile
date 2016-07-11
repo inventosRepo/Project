@@ -5,6 +5,7 @@ gem 'eventmachine'
 gem 'gon'
 gem 'twitter-bootstrap-rails'
 gem 'omniauth-vkontakte'
+gem 'rqrcode'
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.6'
 # Use mysql as the database for Active Record

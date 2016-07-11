@@ -1,4 +1,5 @@
 class SingleplayerController < ApplicationController
+  before_filter :check_for_signed_in
   def index
     if user_signed_in?
       @user = User.where(email: current_user.email).take

@@ -15,6 +15,8 @@ Rails.application.routes.draw do
   post 'multiplayer/index'
   post 'welcome/generate_code'
   get 'welcome/generate_code'
+  post 'welcome/index'
+  get 'welcome/index'
   get 'multiplayer/index', as: 'multiplayer'
   post 'multiplayer/index'
   get 'singleplayer/index', as: 'singleplayer'
@@ -29,6 +31,7 @@ Rails.application.routes.draw do
       post 'profile'
       get 'profile'
       post 'generate'
+      post 'index'
     end
   end
 end

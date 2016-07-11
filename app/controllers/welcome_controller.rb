@@ -1,5 +1,8 @@
 # WelcomeController
 class WelcomeController < ApplicationController
+  def index
+  end
+
   def generate_code
     @user = User.where(email: current_user.email).take
     @user.generate_code

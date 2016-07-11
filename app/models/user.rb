@@ -3,7 +3,7 @@ class User < ActiveRecord::Base
   # :confirmable, :lockable, :timeoutable and :omniauthable
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :trackable, :validatable, :omniauthable,
-         omniauth_providers: [:vkontakte], authentication_keys: [:email]
+         omniauth_providers: [:vkontakte, :mailru, :facebook, :twitter], authentication_keys: [:email]
 
   def remove_code
     self.code = nil

@@ -52,8 +52,13 @@
   <% else %>
 		<p class="welcome_signin">
 	Для начала пожалуйста <%= link_to "зарегистрируйтесь", new_user_registration_path %> или
-		<%= link_to "выполните вход", new_user_session_path %></p>
-		<%= link_to "Sign in with vk", user_vkontakte_omniauth_authorize_path %>
+		<%= link_to "выполните вход", new_user_session_path %>
+		<br>
+		Можете использовать кнопки социальных сетей для авторизации</p>
+		<%=link_to(image_tag("vkontakte.ico"),user_vkontakte_omniauth_authorize_path)%>
+		<%=link_to(image_tag("email.ico"),user_mailru_omniauth_authorize_path)%>
+		<%=link_to(image_tag("facebook.ico"),user_facebook_omniauth_authorize_path)%>
+		<%=link_to(image_tag("twitter.ico"),user_twitter_omniauth_authorize_path)%>
 	<% end %>
 
 </div>

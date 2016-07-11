@@ -1,9 +1,15 @@
 default: &default
   ws_m_port: 3010
   ws_s_port: 3020
-  vk_app_ip: 5540727
+  vk_app_id: 5540727
   vk_app_key: JCb9Q9Yp0V5DVSO45AE4
+  mail_app_id: 745839
+  mail_app_key: ad57f85d712778fe70b39dc179f0ff3d
   ip_for_link_qr: '192.168.1.2:3000'
+  facebook_app_id: 1723880764518320
+  facebook_app_key: 47f2a6a68ae1c2fb1bddaf34ec938423
+  twitter_app_id:  Fw5YTyDf47Bop9QMSBPvhIOX7
+  twitter_app_key: a42Sl2taRyXSoMdLwN1F0nSQVrlLHw0ISF4dM5xfiwNw1AuRs3
 
 development:
   <<: *default

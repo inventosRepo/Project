@@ -3,6 +3,7 @@ default: &default
   ws_s_port: 3020
   vk_app_ip: 5540727
   vk_app_key: JCb9Q9Yp0V5DVSO45AE4
+  ip_for_link_qr: '192.168.1.2:3000'
 
 development:
   <<: *default

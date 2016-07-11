@@ -14,7 +14,7 @@ class User < ActiveRecord::Base
   def generate_code
     code = ['a'..'z', 'A'..'Z', '0'..'9'].map(&:to_a).flatten
     self.code = (0...6).map { code[rand(code.size)] }.join
-    self.qrcode = RQRCode::QRCode.new('192.168.1.2:3000/code/hi?code=' + self.code, size: 5, level: :h).as_html
+    self.qrcode = RQRCode::QRCode.new(APP_CONFIG[:ip_for_link_qr] + '/code/hi?code=' + self.code, size: 5, level: :h).as_html
     self.creatingtime = Time.now
     save
   end

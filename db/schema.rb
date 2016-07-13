@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20160711124406) do
+ActiveRecord::Schema.define(version: 20160713094327) do
 
   create_table "fields", force: :cascade do |t|
     t.string  "player1",         limit: 255
@@ -51,6 +51,7 @@ ActiveRecord::Schema.define(version: 20160711124406) do
     t.string   "provider",               limit: 255
     t.string   "uid",                    limit: 255
     t.text     "qrcode",                 limit: 65535
+    t.string   "field_id",               limit: 255
   end
 
   add_index "users", ["email"], name: "index_users_on_email", unique: true, using: :btree

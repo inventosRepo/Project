@@ -30,16 +30,6 @@ function Tank_object (image) {
 }
 
 function Tank () {
-  var self = this;
-  this.set_pos = function (player) {
-    $.ajax({
-          type: "GET",
-          dataType: "json",
-          url: "/multiplayer/set_pos",
-          data: { user_id: player },
-          success: function (data) { console.log(data); self.x = data.player_x; self.y = data.player_y; self.i = data.player_i; }
-      });
-  };
 }
 
 function Bullet(direct, bull_x, bull_y, bulltype) {
@@ -108,7 +98,8 @@ $(function() {
     var msg = {
       button_id: 0,
       player_id: player,
-      action: 'connect'
+      action: 'connect',
+      host_player: host_player
     };
     socket.send(JSON.stringify(msg));
   }
@@ -119,17 +110,17 @@ $(function() {
   context = canvas.getContext('2d');
   //loading images
   img_brick = new Image();
-  img_brick.src = '<%= asset_path("brick.png") %>';
+  img_brick.src = '/assets/brick-06d518f5ae4468ce2c6aafd0c086afab92697e8f9604be5a2c758d55b6a204fc.png';
   img_steel = new Image();
-  img_steel.src = '<%= asset_path("steel.png") %>';
+  img_steel.src = '/assets/steel-0c40bbb1e62bfd1020b45e19408491bc552b814570418a1d3befa4defeca3bde.png';
   img_water = new Image();
-  img_water.src = '<%= asset_path("water.png") %>';
+  img_water.src = '/assets/water-ba0e34f2f092473d9197182ff937494d52486ef1f540d23969100961b72ce7c2.png';
   img_forest = new Image();
-  img_forest.src = '<%= asset_path("forest.png") %>';
+  img_forest.src = '/assets/forest-4bf232258c74de5774e8a145d05638318ac403626d3a339b5680fb6f78854a67.png';
   img_bullet = new Image();
-  img_bullet.src = '<%= asset_path("bullet.png") %>';
+  img_bullet.src = '/assets/bullet-050a20529cd9b8735e426ea33723decaa7719c054057203500975a806a03ad9d.png';
   img_tank = new Image();
-  img_tank.src = '<%= asset_path("tank.png") %>';
+  img_tank.src = '/assets/tank-a3835ec39a1d3afc158911828afc1f681f5856a0718e91a25d67533a6bb692af.png';
 
   setInterval(draw_scene, 50); //redraw scene every 50 ms
 

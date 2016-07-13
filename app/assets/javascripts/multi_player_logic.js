@@ -1,4 +1,6 @@
+
 function connect() {
+
   socket.onmessage = function (event) {
     var msg = JSON.parse(event.data);
     var button = msg.button_id;
@@ -9,7 +11,9 @@ function connect() {
       if (action == 'connect') {
         console.log(msg);
         player_live[player] = true;
+
         tank[player] = new Tank;
+        console.log(tank);
         set_pos(player);
         function set_pos(player) {
           $.ajax({
@@ -40,7 +44,7 @@ function connect() {
           var cur_cel_y = (2 * tank[player].y) / 48;
           var test_1 = level_map[cur_cel_y][cur_cel_x-1];
           var test_2 = level_map[cur_cel_y+1][cur_cel_x-1];
-          if (tank.length > 2) {
+          if (tank.length > 5) {
             for (x = 1; x < tank.length; x++) {
               if ( ( (tank_cell_x[player] != (tank_cell_x[x]+2)) &&
                      (tank_cell_y[player] == (tank_cell_y[x])) &&
@@ -80,7 +84,7 @@ function connect() {
           var test_1 = level_map[cur_cel_y-1][cur_cel_x];
           var test_2 = level_map[cur_cel_y-1][cur_cel_x+1];
 
-          if (tank.length > 2) {
+          if (tank.length > 5) {
             for (x = 1; x < tank.length; x++) {
               if ( ( (tank_cell_y[player] != (tank_cell_y[x]+2)) &&
                      (tank_cell_x[player] == (tank_cell_x[x])) &&
@@ -120,7 +124,7 @@ function connect() {
           var test_1 = level_map[cur_cel_y+2][cur_cel_x];
           var test_2 = level_map[cur_cel_y+2][cur_cel_x+1];
 
-          if (tank.length > 2) {
+          if (tank.length > 5) {
             for (x = 1; x < tank.length; x++) {
               if ( ( (tank_cell_y[player] != (tank_cell_y[x]-2)) &&
                      (tank_cell_x[player] == (tank_cell_x[x])) &&
@@ -160,7 +164,7 @@ function connect() {
           var test_1 = level_map[cur_cel_y][cur_cel_x+2];
           var test_2 = level_map[cur_cel_y+1][cur_cel_x+2];
 
-          if (tank.length > 2) {
+          if (tank.length > 5) {
             for (x = 1; x < tank.length; x++) {
               if ( ( (tank_cell_x[player] != (tank_cell_x[x]-2)) &&
                      (tank_cell_y[player] == (tank_cell_y[x])) &&

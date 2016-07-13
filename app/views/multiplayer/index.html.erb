@@ -65,7 +65,11 @@
 						<hr>
 						<%@ingames.each do |game|%>
 							<ul>
-								<li><%= game.player1 %> VS <%= game.player2 %></li>
+
+									<li><%=game.player1%> VS <%=game.player2.size%></li>
+									<%= button_to "присоединится", multiplayer_connecting_path(:currentgame => game.player1) %>
+								
+
 							</ul>
 						<% end %>
 					</div>

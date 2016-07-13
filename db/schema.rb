@@ -15,7 +15,7 @@ ActiveRecord::Schema.define(version: 20160713094327) do
 
   create_table "fields", force: :cascade do |t|
     t.string  "player1",         limit: 255
-    t.string  "player2",         limit: 255
+    t.text    "player2",         limit: 65535
     t.string  "online_players",  limit: 255
     t.text    "map",             limit: 65535
     t.integer "save_game",       limit: 4,     default: 0

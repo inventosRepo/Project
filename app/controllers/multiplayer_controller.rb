@@ -7,7 +7,7 @@ class MultiplayerController < ApplicationController
       @current_game = if @user.playersid == '1'
                         Field.where(player1: current_user.email).take
                       else
-                        Field.where(player2: current_user.email).take
+                        #Field.where(player2: current_user.email).take
                       end
       map = Level.find(@user.user_level)
       if @current_game.nil?
@@ -34,8 +34,9 @@ class MultiplayerController < ApplicationController
   end
 
   def new
-    if !Field.exists?(player1: current_user.email) && !Field.exists?(player2: current_user.email)
+    if !Field.exists?(player1: current_user.email)# && !Field.exists?(player2: current_user.email)
       @field = Field.new
+      @field.player2 = nil
       Field.CreatingField(@field, current_user.email)
 
       @user = User.where(email: current_user.email).take
@@ -52,9 +53,11 @@ class MultiplayerController < ApplicationController
       @field = Field.where(player1: @currentmail).take
       Field.ConnectingField(@field, current_user.email)
       @user = User.where(email: current_user.email).take
-      @user.playersid = 2
-      @user.field_id = @field.id
-      @user.save
+      if !@field.player2.nil?
+        @user.playersid = @field.player2.index(current_user.email) + 2
+        @user.field_id = @field.id
+        @user.save
+      end
     end
     redirect_to multiplayer_index_path
   end
@@ -67,23 +70,23 @@ class MultiplayerController < ApplicationController
       @user.playersid = nil
       @user.field_id = nil
       unless @game.player2.nil?
-        @user2 = User.where(email: @game.player2).take
-        @user2.playersid = nil
-        @user2.playersid = nil
-        @user2.save
+        @game.player2.each do |user|
+          @user = User.where(email: user).take
+          @user.playersid = nil
+          @user.field_id = nil
+          @user.save
+         end
       end
       @field.destroy_all
       @user.save
     else
-      if Field.exists?(player2: current_user.email)
-        @field = Field.where(player2: current_user.email).take
-        @user.playersid = nil
-        @field.player2 = nil
-        @field.online_players = 1
-        @user.playersid = nil
-        @user.save
-        @field.save
-      end
+      @user = User.where(email: current_user.email).take
+      @user.playersid = nil
+      @user.field_id = nil
+      @user.save
+
+      @field.player2.delete(current_user.email)
+      @field.save
     end
     redirect_to multiplayer_index_path
   end
